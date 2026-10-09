@@ -1,0 +1,4 @@
+*.db
+dados/
+.ipynb_checkpoints/
+.env
