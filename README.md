@@ -52,4 +52,4 @@ Projeto de ponta a ponta, supervisionado, seguindo o CRISP-DM. Ele vai do SQL ao
 3. No notebook 05, a parte de IA generativa usa a chave `GEMINI_API_KEY` guardada nos *Secrets* do Colab. Nunca escreva a chave no notebook.
 
 ---
-**Autora:** Jéssica Priscila de Oliveira Martins · [LinkedIn](https://www.linkedin.com/in/jessica-oliveira-martins/) · [Portfólio](https://claude.ai/artifact/YPyaaqo16QuwKBKGw9VF5m)
+**Autora:** Jéssica Priscila de Oliveira Martins · [LinkedIn](https://www.linkedin.com/in/jessica-oliveira-martins/) · [Portfólio](https://portfolio-jessica-martins.vercel.app/)
