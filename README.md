@@ -1,7 +1,5 @@
 # Previsão de faltas em consultas médicas
 
-> 🚧 **Em construção:** notebooks prontos; falta o painel no Power BI.
-
 Projeto de ponta a ponta, supervisionado, seguindo o CRISP-DM. Ele vai do SQL ao modelo de risco e termina numa **regra de próxima melhor ação**, que escolhe o que fazer com cada consulta.
 
 **Cliente (cenário):** rede pública de saúde em Vitória (ES).
@@ -17,7 +15,12 @@ Projeto de ponta a ponta, supervisionado, seguindo o CRISP-DM. Ele vai do SQL ao
 | Modelagem (Machine Learning) | [03 · regressão logística, Random Forest, Gradient Boosting](notebooks/03_modelagem_ml.ipynb) | ✅ |
 | Modelagem (Deep Learning) | [04 · rede densa em Keras](notebooks/04_deep_learning.ipynb) | ✅ |
 | Decisão + IA generativa | [05 · próxima melhor ação e textos de contato](notebooks/05_proxima_melhor_acao.ipynb) | ✅ |
-| Implantação | [06 · dados para o Power BI](notebooks/06_exportar_powerbi.ipynb) · painel publicado | ⏳ painel |
+| Implantação | [06 · dados para o Power BI](notebooks/06_exportar_powerbi.ipynb) · [painel publicado](https://app.powerbi.com/view?r=eyJrIjoiODA0MjQyYzYtNTMwOC00ZGM0LTgxYjUtOTMyMzY2ZjBhNjYzIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9) | ✅ |
+
+## Painel interativo (Power BI)
+[![Painel Power BI: faltas em consultas](img/painel_powerbi.jpg)](https://app.powerbi.com/view?r=eyJrIjoiODA0MjQyYzYtNTMwOC00ZGM0LTgxYjUtOTMyMzY2ZjBhNjYzIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9)
+
+🔗 [Abrir o painel](https://app.powerbi.com/view?r=eyJrIjoiODA0MjQyYzYtNTMwOC00ZGM0LTgxYjUtOTMyMzY2ZjBhNjYzIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9): 4 páginas (visão geral, paradoxo do SMS, agenda da semana com a próxima melhor ação, premissas e modelo), com filtros por sexo, faixa etária, bairro, SMS e período.
 
 ## Principais resultados
 - **20,2% das consultas viram falta** (22.319 de 110.527).
