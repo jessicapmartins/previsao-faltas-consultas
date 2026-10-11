@@ -16,7 +16,7 @@ Projeto de ponta a ponta, supervisionado, seguindo o CRISP-DM. Ele vai do SQL ao
 | Análise exploratória | [02 · EDA e base analítica](notebooks/02_eda.ipynb) | ✅ |
 | Modelagem (Machine Learning) | [03 · regressão logística, Random Forest, Gradient Boosting](notebooks/03_modelagem_ml.ipynb) | ✅ |
 | Modelagem (Deep Learning) | [04 · rede densa em Keras](notebooks/04_deep_learning.ipynb) | ✅ |
-| Decisão + IA generativa | [05 · próxima melhor ação e textos de contato](notebooks/05_proxima_melhor_acao.ipynb) | ✅ (textos: rodar no Colab) |
+| Decisão + IA generativa | [05 · próxima melhor ação e textos de contato](notebooks/05_proxima_melhor_acao.ipynb) | ✅ |
 | Implantação | [06 · dados para o Power BI](notebooks/06_exportar_powerbi.ipynb) · painel publicado | ⏳ painel |
 
 ## Principais resultados
