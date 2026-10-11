@@ -15,7 +15,7 @@ Projeto de ponta a ponta, supervisionado, seguindo o CRISP-DM. Ele vai do SQL ao
 | Entender os dados com SQL | [00 · modelagem em 3 tabelas](notebooks/00_setup_modelagem_sql.ipynb) · [01 · 9 perguntas de negócio](notebooks/01_sql_perguntas_negocio.ipynb) | ✅ |
 | Análise exploratória | [02 · EDA e base analítica](notebooks/02_eda.ipynb) | ✅ |
 | Modelagem (Machine Learning) | [03 · regressão logística, Random Forest, Gradient Boosting](notebooks/03_modelagem_ml.ipynb) | ✅ |
-| Modelagem (Deep Learning) | [04 · rede densa em Keras](notebooks/04_deep_learning.ipynb) | ⏳ rodar no Colab |
+| Modelagem (Deep Learning) | [04 · rede densa em Keras](notebooks/04_deep_learning.ipynb) | ✅ |
 | Decisão + IA generativa | [05 · próxima melhor ação e textos de contato](notebooks/05_proxima_melhor_acao.ipynb) | ✅ (textos: rodar no Colab) |
 | Implantação | [06 · dados para o Power BI](notebooks/06_exportar_powerbi.ipynb) · painel publicado | ⏳ painel |
 
@@ -24,6 +24,7 @@ Projeto de ponta a ponta, supervisionado, seguindo o CRISP-DM. Ele vai do SQL ao
 - **A antecedência é o principal fator:** consultas do mesmo dia têm 4,6% de falta; a partir de 8 dias de antecedência, mais de 30%. Histórico de faltas e idade vêm em seguida.
 - **O efeito do SMS não pode ser medido com esta base:** na base inteira, quem recebeu SMS falta mais (27,6% contra 16,7%). Dentro de cada faixa de antecedência, falta menos. O SMS não foi enviado ao acaso (só a partir de 3 dias de antecedência), então a diferença não é causal.
 - **Modelo:** Gradient Boosting com ROC-AUC 0,73 e PR-AUC 0,34, contra 0,19 de um modelo sem informação, em uma semana de teste separada no tempo. Ligando para os 20% de maior risco, a equipe encontra 38% das faltas, quase o dobro do acaso.
+- **Deep learning:** uma rede densa em Keras empatou com o Gradient Boosting (PR-AUC 0,341 contra 0,342). Como não ganhou nada e é mais complexa de treinar e explicar, o modelo final continua o Gradient Boosting.
 - **Próxima melhor ação:** uma regra de custo esperado escolhe entre nenhuma ação, lembrete, ligação, reconfirmação e encaixe. Na semana de teste, a regra reduziria o custo das faltas em 11,5%, contra 8,8% de ligar para todos.
   - Os efeitos das ações são **premissas ilustrativas**, a validar com teste A/B.
 
