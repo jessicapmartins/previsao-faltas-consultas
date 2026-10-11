@@ -3,6 +3,6 @@ numpy
 matplotlib
 seaborn
 scikit-learn
-xgboost
+keras
 tensorflow
-google-generativeai
+google-genai
