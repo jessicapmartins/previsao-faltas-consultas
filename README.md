@@ -26,6 +26,8 @@ Projeto de ponta a ponta, supervisionado, seguindo o CRISP-DM. Ele vai do SQL ao
 
 📘 **Documentação do modelo Power BI:** [abrir](https://claude.ai/artifact/NVBMomumL2gSB1UVCS4ktG) · gerada por [`docs/gerar_documentacao.py`](docs/gerar_documentacao.py), que lê os arquivos TMDL do projeto (tabelas, colunas, 43 medidas DAX, relação e fontes).
 
+📄 **Relatório executivo (PDF):** [abrir](https://portfolio-jessica-martins.vercel.app/relatorio-faltas-consultas.pdf) · gerado por uma skill do Claude que lê as bases do painel e escreve KPIs, evolução, ponto de atenção e recomendações.
+
 ## Principais resultados
 - **20,2% das consultas viram falta** (22.319 de 110.527).
 - **A antecedência é o principal fator:** consultas do mesmo dia têm 4,6% de falta; a partir de 8 dias de antecedência, mais de 30%. Histórico de faltas e idade vêm em seguida.
