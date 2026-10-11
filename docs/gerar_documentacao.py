@@ -111,8 +111,34 @@ MED = {   # descrição, valor atual (sem filtros), conferido no modelo
     'Custo esperado com a regra': ('Soma do custo esperado com a ação recomendada.', 'R$ 609.920'),
     'Economia esperada': ('Diferença entre os dois custos.', 'R$ 152.234'), 'Economia esperada %': ('Economia sobre o custo sem ação.', '20,0%'),
     'Consultas de alto risco': ('Consultas com risco previsto de 30% ou mais.', '10.605'),
+    # pasta Visual (layout "Presença"): valores conferidos com DAX no modelo, sem filtros
+    'Txt bairros': ('Texto com o número de bairros no filtro (card de consultas).', '81 bairros'),
+    'Txt dias': ('Texto com o número de dias com consulta.', '27 dias com consulta'),
+    'Txt horários vagos': ('Texto com o total de faltas.', '22.311 horários vagos'),
+    'Txt 1 em N': ('A taxa de falta dita como "1 em N".', '1 em 5'),
+    'Txt consultas': ('Texto com o número de consultas (infográfico e histórico).', '110.514 consultas'),
+    'Dif mesmo dia': ('Diferença em pontos percentuais entre a falta no mesmo dia e a taxa geral.', '−15,5'),
+    'Dif 8+ dias': ('Diferença em p.p. entre a falta com 8+ dias e a taxa geral.', '11,9'),
+    'Taxa última semana': ('Taxa de falta nos últimos 7 dias do período filtrado.', '18,5%'),
+    'Dif última semana': ('Diferença em p.p. entre os últimos 7 dias e o período inteiro.', '−1,7'),
+    'Dif vs geral': ('Diferença em p.p. entre a faixa etária e todas as faixas juntas.', '0,0'),
+    'Txt dif mesmo dia': ('Etiqueta com seta para o card de falta no mesmo dia.', '▼ 15,5 p.p.'),
+    'Txt dif 8+ dias': ('Etiqueta com seta para o card de falta com 8+ dias.', '▲ 11,9 p.p.'),
+    'Txt dif última semana': ('Etiqueta com seta da última semana.', '▼ 1,7 p.p.'),
+    'Txt dif vs geral': ('Etiqueta do infográfico; "≈ média" quando a diferença é menor que 0,5 p.p.', '≈ média'),
+    'Cor dif mesmo dia': ('Cor da etiqueta: verde se menor que a taxa geral, vermelho se maior.', '#1E8A55'),
+    'Fundo dif mesmo dia': ('Fundo da etiqueta, no mesmo critério.', '#E4F5EC'),
+    'Cor dif 8+ dias': ('Cor da etiqueta de 8+ dias.', '#C2453F'), 'Fundo dif 8+ dias': ('Fundo da etiqueta de 8+ dias.', '#FBE0DF'),
+    'Cor dif última semana': ('Cor da etiqueta da última semana.', '#1E8A55'), 'Fundo dif última semana': ('Fundo da etiqueta da última semana.', '#E4F5EC'),
+    'Cor dif vs geral': ('Cor do infográfico: verde até −2 p.p., vermelho a partir de +2 p.p., cinza entre os dois.', '#5E7472'),
+    'Fundo dif vs geral': ('Fundo da etiqueta do infográfico, no mesmo critério.', '#EEF1F4'),
+    'Cor dia da semana': ('Verde-lima no dia de maior taxa entre os visíveis, verde-água nos demais.', 'por dia'),
+    'Cor antecedência': ('Verde-água abaixo de 15%, lavanda de 15% a 30%, rosa acima de 30%.', 'por faixa'),
+    'Txt economia %': ('Economia esperada como % do custo sem ação.', '20,0% do custo sem ação'),
+    'Txt alto risco %': ('Consultas de alto risco como % da agenda.', '30,1% da agenda'),
+
 }
-PASTA_DESC = {'Histórico': 'Base inteira, para a visão geral.', 'SMS': 'O paradoxo do SMS.', 'Agenda': 'Semana de teste e regra de próxima melhor ação.'}
+PASTA_DESC = {'Visual': 'Textos e cores do layout: etiquetas, setas e formatação condicional.', 'Histórico': 'Base inteira, para a visão geral.', 'SMS': 'O paradoxo do SMS.', 'Agenda': 'Semana de teste e regra de próxima melhor ação.'}
 
 # =============================================================== helpers de HTML
 def dax(code):
@@ -216,26 +242,29 @@ rel_rows = ''.join(f"<tr><td><code>{e(b)}</code></td><td><code>{e(a)}</code></td
 PAGE = f'''<title>Documentação · Painel de Faltas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: documentação técnica com sumário lateral que acompanha a rolagem, conteúdo em seções numeradas na ordem de leitura */
 :root{{
-  --bg:#F4F7FA; --surface:#FFFFFF; --surface-2:#EDF2F7; --ink:#14233A; --muted:#5B6B7F; --line:#DCE4EE;
-  --navy:#13315C; --teal:#0E9F8E; --teal-soft:#DDF3F0; --coral:#E4572E; --amber:#E0961A; --sky:#3E8FD0; --purple:#6F5FE8;
-  --on-accent:#FFFFFF; --code-bg:#EEF2F8; --c-fn:#0C7F72; --c-str:#A2501B; --c-ref:#2F4FB0; --c-num:#8A3AA0;
+  --bg:#EEF6F3; --surface:#FFFFFF; --surface-2:#F2F8F6; --ink:#10302E; --muted:#5E7472; --line:#DCEBE8;
+  --navy:#0F3D3A; --teal:#2F9C88; --teal-soft:#E2F3EE; --coral:#D9655F; --amber:#7BA82E; --sky:#8C88E6; --purple:#6B66D9;
+  --lime:#DCEFB4; --mint:#AEE0D5; --pink:#F6C1C0; --lav:#C3C3F5;
+  --on-accent:#FFFFFF; --code-bg:#F2F8F6; --c-fn:#1F7F6E; --c-str:#B0503F; --c-ref:#4C47B8; --c-num:#7A3F9A;
   --shadow:0 1px 2px rgba(19,49,92,.05),0 8px 24px rgba(19,49,92,.06);
-  --display:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-  --body:"Source Sans 3",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --display:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }}
 @media (prefers-color-scheme: dark){{:root:not([data-theme="light"]){{
-  --bg:#0C1420; --surface:#121D2C; --surface-2:#182638; --ink:#E4EBF4; --muted:#9AAABD; --line:#243449;
-  --navy:#6E9BDA; --teal:#35C2AF; --teal-soft:#123532; --coral:#F07A5E; --amber:#F0B04A; --sky:#6FB2E8; --purple:#9C91F2;
+  --bg:#0B1716; --surface:#11201F; --surface-2:#172A28; --ink:#E3F0EC; --muted:#9BB3AF; --line:#24403C;
+  --navy:#7FCDBD; --teal:#4CC2AC; --teal-soft:#123532; --coral:#F08F89; --amber:#B5D96A; --sky:#A9A6F0; --purple:#A9A6F0;
+  --lime:#3E4A26; --mint:#1D4842; --pink:#4E2B2A; --lav:#2E2C55;
   --on-accent:#08131F; --code-bg:#0B1522; --c-fn:#5FD3C1; --c-str:#EAA36E; --c-ref:#9DB7FF; --c-num:#D7A1EA;
   --shadow:0 1px 2px rgba(0,0,0,.35); color-scheme:dark}}}}
 :root[data-theme="dark"]{{
-  --bg:#0C1420; --surface:#121D2C; --surface-2:#182638; --ink:#E4EBF4; --muted:#9AAABD; --line:#243449;
-  --navy:#6E9BDA; --teal:#35C2AF; --teal-soft:#123532; --coral:#F07A5E; --amber:#F0B04A; --sky:#6FB2E8; --purple:#9C91F2;
+  --bg:#0B1716; --surface:#11201F; --surface-2:#172A28; --ink:#E3F0EC; --muted:#9BB3AF; --line:#24403C;
+  --navy:#7FCDBD; --teal:#4CC2AC; --teal-soft:#123532; --coral:#F08F89; --amber:#B5D96A; --sky:#A9A6F0; --purple:#A9A6F0;
+  --lime:#3E4A26; --mint:#1D4842; --pink:#4E2B2A; --lav:#2E2C55;
   --on-accent:#08131F; --code-bg:#0B1522; --c-fn:#5FD3C1; --c-str:#EAA36E; --c-ref:#9DB7FF; --c-num:#D7A1EA;
   --shadow:0 1px 2px rgba(0,0,0,.35); color-scheme:dark}}
 *{{box-sizing:border-box}}
@@ -267,9 +296,9 @@ nav.toc{{position:sticky;top:calc(env(safe-area-inset-top,0px) + 28px);align-sel
 .meta{{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:.88rem;color:var(--muted)}}
 .meta b{{color:var(--ink);font-weight:600}}
 .kpis{{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}}
-.kpi{{border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;color:var(--on-accent)}}
+.kpi{{border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;color:var(--ink)}}
 .kpi .l{{font-size:.84rem;opacity:.9}} .kpi .v{{font:800 2rem/1 var(--display);font-variant-numeric:tabular-nums}} .kpi .s{{font-size:.8rem;opacity:.85}}
-.k1{{background:var(--navy)}} .k2{{background:var(--coral)}} .k3{{background:var(--teal)}} .k4{{background:var(--purple)}}
+.k1{{background:var(--lime)}} .k2{{background:var(--mint)}} .k3{{background:var(--pink)}} .k4{{background:var(--lav)}}
 .stack{{display:flex;height:34px;border-radius:8px;overflow:hidden}}
 .stack span{{display:flex;align-items:center;padding-inline:8px;font:600 .78rem/1 var(--body);color:#fff;white-space:nowrap;overflow:hidden}}
 .legend{{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.84rem;color:var(--muted)}}
@@ -364,7 +393,7 @@ footer{{font-size:.86rem;color:var(--muted);display:flex;flex-direction:column;g
 
 <div class="shell">
   <nav class="toc" aria-label="Sumário">
-    <div class="brand">Painel de Faltas</div><div class="sub">Documentação técnica · v1.0</div>
+    <div class="brand">Presença · Painel de Faltas</div><div class="sub">Documentação técnica · v1.1</div>
     <ol>
       <li><a href="#visao">Visão geral</a></li><li><a href="#arquitetura">Arquitetura</a></li><li><a href="#tabelas">Tabelas e campos</a></li>
       <li><a href="#relacionamentos">Relacionamentos</a></li><li><a href="#logica">Lógica do painel</a></li><li><a href="#medidas">Catálogo de medidas</a></li>
@@ -411,7 +440,7 @@ footer{{font-size:.86rem;color:var(--muted);display:flex;flex-direction:column;g
         <tr><td>Modelo de ML</td><td>scikit-learn</td><td>Gradient Boosting treinado até 25/05 e testado na semana seguinte; gera o risco de cada consulta.</td></tr>
         <tr><td>Decisão</td><td>Python</td><td>Regra de custo esperado que escolhe a ação de cada consulta.</td></tr>
         <tr><td>Semântica</td><td>Power Query + DAX</td><td>Tipos em pt-BR, relação, medidas e rótulos ordenados.</td></tr>
-        <tr><td>Apresentação</td><td>Power BI (PBIR)</td><td>Tema próprio, ícones SVG, filtros por página.</td></tr>
+        <tr><td>Apresentação</td><td>Power BI (PBIR)</td><td>Fundo de cada página desenhado em HTML e exportado como imagem; visuais nativos transparentes por cima; menu lateral com botões de navegação; tema pastel.</td></tr>
       </tbody></table></div>
     </section>
 
@@ -522,9 +551,9 @@ footer{{font-size:.86rem;color:var(--muted);display:flex;flex-direction:column;g
     <section id="paginas">
       <div class="sec-head"><span class="eyebrow">09</span><h2>Páginas do relatório</h2></div>
       <div class="tw"><table><thead><tr><th>Página</th><th>Pergunta que responde</th><th>Visuais</th><th>Filtros</th></tr></thead><tbody>
-        <tr><td><b>Visão geral</b></td><td>Quanto se falta e onde se concentra?</td><td>4 KPIs, área por dia, colunas por antecedência, rosca por histórico, barras por idade e bairro</td><td>Sexo, faixa etária, bairro, SMS, data</td></tr>
+        <tr><td><b>Visão geral</b></td><td>Quanto se falta e onde se concentra?</td><td>4 cards com etiquetas de diferença, linha diária com o histórico do paciente, infográfico de faixa etária, colunas por dia da semana e por antecedência</td><td>Período, sexo, faixa etária, bairro, SMS</td></tr>
         <tr><td><b>O paradoxo do SMS</b></td><td>O SMS reduz faltas?</td><td>3 KPIs, colunas com e sem SMS por faixa, linha de quem recebe SMS, nota</td><td>Sexo, faixa etária, bairro, histórico</td></tr>
-        <tr><td><b>Agenda da semana</b></td><td>O que fazer com cada consulta?</td><td>5 KPIs, rosca por ação, combinado consultas × falta real por faixa, tabela por ação, nota</td><td>Ação, faixa de risco, faixa etária, bairro, data</td></tr>
+        <tr><td><b>Agenda da semana</b></td><td>O que fazer com cada consulta?</td><td>5 KPIs, rosca por ação, combinado consultas × falta real por faixa, tabela por ação, nota</td><td>Ação, faixa de risco, faixa etária, bairro</td></tr>
         <tr><td><b>Premissas e modelo</b></td><td>Em que premissas e modelo isso se apoia?</td><td>4 KPIs, tabelas de premissas e modelos, regra e limitações</td><td>—</td></tr>
       </tbody></table></div>
     </section>
@@ -536,7 +565,7 @@ footer{{font-size:.86rem;color:var(--muted);display:flex;flex-direction:column;g
         <div class="issue"><span class="pill hi">Alta</span><h3>Calibração do risco</h3><p>Nas faixas acima de 30% o risco previsto passa da falta real. Recalibrar com dados recentes antes de decidir encaixes.</p></div>
         <div class="issue"><span class="pill md">Média</span><h3>Caminho fixo dos arquivos</h3><p>As consultas apontam para <code>D:\\Projetos IA\\Projeto 2 Saude\\powerbi\\</code>. Trocar por um parâmetro do Power Query.</p></div>
         <div class="issue"><span class="pill md">Média</span><h3>Tabela Modelos digitada</h3><p>Métricas copiadas dos notebooks 03 e 04. Se os modelos forem retreinados, atualizar ou passar a ler um CSV.</p></div>
-        <div class="issue"><span class="pill lo">Baixa</span><h3>Visuais ocultos antigos</h3><p>14 visuais vazios e ocultos da primeira versão do layout. Podem ser apagados no painel Seleção.</p></div>
+        <div class="issue"><span class="pill lo">Baixa</span><h3>Visuais ocultos antigos</h3><p>29 caixas vazias e ocultas que sobraram das versões anteriores do layout (páginas 2 a 4). Podem ser apagadas no painel Seleção.</p></div>
         <div class="issue"><span class="pill lo">Baixa</span><h3>Encaixe tem custo humano</h3><p>Em saúde pública, só faz sentido com fila de espera ativa e limite de encaixes por turno.</p></div>
       </div>
     </section>
@@ -547,6 +576,7 @@ footer{{font-size:.86rem;color:var(--muted);display:flex;flex-direction:column;g
         <tr><td>11/10/2026</td><td>0.1</td><td>Modelo criado: 4 tabelas, relação Consultas → Agenda, 17 medidas e colunas de ordenação.</td></tr>
         <tr><td>11/10/2026</td><td>0.2</td><td>Primeiro layout de 4 páginas.</td></tr>
         <tr><td>11/10/2026</td><td>1.0</td><td>Tema próprio, ícones SVG, cards coloridos, filtros por página; relatório publicado na web.</td></tr>
+        <tr><td>11/10/2026</td><td>1.1</td><td>Layout "Presença": fundo desenhado, menu lateral com navegação, paleta pastel, infográfico de faixa etária e 26 medidas de texto e cor (pasta Visual).</td></tr>
       </tbody></table></div>
     </section>
 

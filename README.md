@@ -20,9 +20,11 @@ Projeto de ponta a ponta, supervisionado, seguindo o CRISP-DM. Ele vai do SQL ao
 ## Painel interativo (Power BI)
 [![Painel Power BI: faltas em consultas](img/painel_powerbi.jpg)](https://app.powerbi.com/view?r=eyJrIjoiODA0MjQyYzYtNTMwOC00ZGM0LTgxYjUtOTMyMzY2ZjBhNjYzIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9)
 
-🔗 [Abrir o painel](https://app.powerbi.com/view?r=eyJrIjoiODA0MjQyYzYtNTMwOC00ZGM0LTgxYjUtOTMyMzY2ZjBhNjYzIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9): 4 páginas (visão geral, paradoxo do SMS, agenda da semana com a próxima melhor ação, premissas e modelo), com filtros por sexo, faixa etária, bairro, SMS e período.
+🔗 [Abrir o painel](https://app.powerbi.com/view?r=eyJrIjoiODA0MjQyYzYtNTMwOC00ZGM0LTgxYjUtOTMyMzY2ZjBhNjYzIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9): layout próprio ("Presença") em 4 páginas: visão geral, paradoxo do SMS, agenda da semana com a próxima melhor ação, e premissas e modelo. Filtros por período, sexo, faixa etária, bairro e SMS.
 
-📘 **Documentação do modelo Power BI:** [abrir](https://claude.ai/artifact/NVBMomumL2gSB1UVCS4ktG) · gerada por [`docs/gerar_documentacao.py`](docs/gerar_documentacao.py), que lê os arquivos TMDL do projeto (tabelas, colunas, 17 medidas DAX, relação e fontes).
+🎞️ **Apresentação executiva (Figma Slides):** [abrir](https://www.figma.com/slides/oxiDn0T2xjWyQlVPDGu9he)
+
+📘 **Documentação do modelo Power BI:** [abrir](https://claude.ai/artifact/NVBMomumL2gSB1UVCS4ktG) · gerada por [`docs/gerar_documentacao.py`](docs/gerar_documentacao.py), que lê os arquivos TMDL do projeto (tabelas, colunas, 43 medidas DAX, relação e fontes).
 
 ## Principais resultados
 - **20,2% das consultas viram falta** (22.319 de 110.527).

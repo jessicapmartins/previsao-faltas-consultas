@@ -1,26 +1,29 @@
 <title>Documentação · Painel de Faltas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: documentação técnica com sumário lateral que acompanha a rolagem, conteúdo em seções numeradas na ordem de leitura */
 :root{
-  --bg:#F4F7FA; --surface:#FFFFFF; --surface-2:#EDF2F7; --ink:#14233A; --muted:#5B6B7F; --line:#DCE4EE;
-  --navy:#13315C; --teal:#0E9F8E; --teal-soft:#DDF3F0; --coral:#E4572E; --amber:#E0961A; --sky:#3E8FD0; --purple:#6F5FE8;
-  --on-accent:#FFFFFF; --code-bg:#EEF2F8; --c-fn:#0C7F72; --c-str:#A2501B; --c-ref:#2F4FB0; --c-num:#8A3AA0;
+  --bg:#EEF6F3; --surface:#FFFFFF; --surface-2:#F2F8F6; --ink:#10302E; --muted:#5E7472; --line:#DCEBE8;
+  --navy:#0F3D3A; --teal:#2F9C88; --teal-soft:#E2F3EE; --coral:#D9655F; --amber:#7BA82E; --sky:#8C88E6; --purple:#6B66D9;
+  --lime:#DCEFB4; --mint:#AEE0D5; --pink:#F6C1C0; --lav:#C3C3F5;
+  --on-accent:#FFFFFF; --code-bg:#F2F8F6; --c-fn:#1F7F6E; --c-str:#B0503F; --c-ref:#4C47B8; --c-num:#7A3F9A;
   --shadow:0 1px 2px rgba(19,49,92,.05),0 8px 24px rgba(19,49,92,.06);
-  --display:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-  --body:"Source Sans 3",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --display:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0C1420; --surface:#121D2C; --surface-2:#182638; --ink:#E4EBF4; --muted:#9AAABD; --line:#243449;
-  --navy:#6E9BDA; --teal:#35C2AF; --teal-soft:#123532; --coral:#F07A5E; --amber:#F0B04A; --sky:#6FB2E8; --purple:#9C91F2;
+  --bg:#0B1716; --surface:#11201F; --surface-2:#172A28; --ink:#E3F0EC; --muted:#9BB3AF; --line:#24403C;
+  --navy:#7FCDBD; --teal:#4CC2AC; --teal-soft:#123532; --coral:#F08F89; --amber:#B5D96A; --sky:#A9A6F0; --purple:#A9A6F0;
+  --lime:#3E4A26; --mint:#1D4842; --pink:#4E2B2A; --lav:#2E2C55;
   --on-accent:#08131F; --code-bg:#0B1522; --c-fn:#5FD3C1; --c-str:#EAA36E; --c-ref:#9DB7FF; --c-num:#D7A1EA;
   --shadow:0 1px 2px rgba(0,0,0,.35); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0C1420; --surface:#121D2C; --surface-2:#182638; --ink:#E4EBF4; --muted:#9AAABD; --line:#243449;
-  --navy:#6E9BDA; --teal:#35C2AF; --teal-soft:#123532; --coral:#F07A5E; --amber:#F0B04A; --sky:#6FB2E8; --purple:#9C91F2;
+  --bg:#0B1716; --surface:#11201F; --surface-2:#172A28; --ink:#E3F0EC; --muted:#9BB3AF; --line:#24403C;
+  --navy:#7FCDBD; --teal:#4CC2AC; --teal-soft:#123532; --coral:#F08F89; --amber:#B5D96A; --sky:#A9A6F0; --purple:#A9A6F0;
+  --lime:#3E4A26; --mint:#1D4842; --pink:#4E2B2A; --lav:#2E2C55;
   --on-accent:#08131F; --code-bg:#0B1522; --c-fn:#5FD3C1; --c-str:#EAA36E; --c-ref:#9DB7FF; --c-num:#D7A1EA;
   --shadow:0 1px 2px rgba(0,0,0,.35); color-scheme:dark}
 *{box-sizing:border-box}
@@ -52,9 +55,9 @@ nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 28px);align-self
 .meta{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:.88rem;color:var(--muted)}
 .meta b{color:var(--ink);font-weight:600}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
-.kpi{border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;color:var(--on-accent)}
+.kpi{border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;color:var(--ink)}
 .kpi .l{font-size:.84rem;opacity:.9} .kpi .v{font:800 2rem/1 var(--display);font-variant-numeric:tabular-nums} .kpi .s{font-size:.8rem;opacity:.85}
-.k1{background:var(--navy)} .k2{background:var(--coral)} .k3{background:var(--teal)} .k4{background:var(--purple)}
+.k1{background:var(--lime)} .k2{background:var(--mint)} .k3{background:var(--pink)} .k4{background:var(--lav)}
 .stack{display:flex;height:34px;border-radius:8px;overflow:hidden}
 .stack span{display:flex;align-items:center;padding-inline:8px;font:600 .78rem/1 var(--body);color:#fff;white-space:nowrap;overflow:hidden}
 .legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.84rem;color:var(--muted)}
@@ -149,7 +152,7 @@ footer{font-size:.86rem;color:var(--muted);display:flex;flex-direction:column;ga
 
 <div class="shell">
   <nav class="toc" aria-label="Sumário">
-    <div class="brand">Painel de Faltas</div><div class="sub">Documentação técnica · v1.0</div>
+    <div class="brand">Presença · Painel de Faltas</div><div class="sub">Documentação técnica · v1.1</div>
     <ol>
       <li><a href="#visao">Visão geral</a></li><li><a href="#arquitetura">Arquitetura</a></li><li><a href="#tabelas">Tabelas e campos</a></li>
       <li><a href="#relacionamentos">Relacionamentos</a></li><li><a href="#logica">Lógica do painel</a></li><li><a href="#medidas">Catálogo de medidas</a></li>
@@ -168,7 +171,7 @@ footer{font-size:.86rem;color:var(--muted);display:flex;flex-direction:column;ga
       <div class="kpis">
         <div class="kpi k1"><span class="l">Consultas analisadas</span><span class="v">110.514</span><span class="s">4 tabelas · 46 colunas</span></div>
         <div class="kpi k2"><span class="l">Taxa de falta</span><span class="v">20,2%</span><span class="s">22.311 horários vagos</span></div>
-        <div class="kpi k3"><span class="l">Medidas DAX</span><span class="v">17</span><span class="s">9 colunas calculadas · 1 relação</span></div>
+        <div class="kpi k3"><span class="l">Medidas DAX</span><span class="v">43</span><span class="s">9 colunas calculadas · 1 relação</span></div>
         <div class="kpi k4"><span class="l">Economia esperada</span><span class="v">R$ 152 mil</span><span class="s">semana de teste, premissas ilustrativas</span></div>
       </div>
       <div class="panel" style="display:flex;flex-direction:column;gap:10px">
@@ -188,7 +191,7 @@ footer{font-size:.86rem;color:var(--muted);display:flex;flex-direction:column;ga
         <div class="step"><span class="n">1 · ORIGEM</span><b>Base pública</b><span>110.527 agendamentos (Kaggle), em SQLite</span></div>
         <div class="step"><span class="n">2 · PREPARO</span><b>Notebooks 00–06</b><span>SQL, limpeza, modelo de risco e regra de custo</span></div>
         <div class="step"><span class="n">3 · ENTREGA</span><b>3 CSVs + 1 tabela</b><span>separador ; e vírgula decimal</span></div>
-        <div class="step key"><span class="n">4 · MODELO</span><b>Power BI</b><span>4 tabelas · 17 medidas · 1 relação</span></div>
+        <div class="step key"><span class="n">4 · MODELO</span><b>Power BI</b><span>4 tabelas · 43 medidas · 1 relação</span></div>
         <div class="step"><span class="n">5 · CONSUMO</span><b>Relatório publicado</b><span>4 páginas · Publicar na Web</span></div>
       </div>
       <div class="tw"><table><thead><tr><th>Camada</th><th>Ferramenta</th><th>O que faz</th></tr></thead><tbody>
@@ -196,7 +199,7 @@ footer{font-size:.86rem;color:var(--muted);display:flex;flex-direction:column;ga
         <tr><td>Modelo de ML</td><td>scikit-learn</td><td>Gradient Boosting treinado até 25/05 e testado na semana seguinte; gera o risco de cada consulta.</td></tr>
         <tr><td>Decisão</td><td>Python</td><td>Regra de custo esperado que escolhe a ação de cada consulta.</td></tr>
         <tr><td>Semântica</td><td>Power Query + DAX</td><td>Tipos em pt-BR, relação, medidas e rótulos ordenados.</td></tr>
-        <tr><td>Apresentação</td><td>Power BI (PBIR)</td><td>Tema próprio, ícones SVG, filtros por página.</td></tr>
+        <tr><td>Apresentação</td><td>Power BI (PBIR)</td><td>Fundo de cada página desenhado em HTML e exportado como imagem; visuais nativos transparentes por cima; menu lateral com botões de navegação; tema pastel.</td></tr>
       </tbody></table></div>
     </section>
 
@@ -207,7 +210,7 @@ footer{font-size:.86rem;color:var(--muted);display:flex;flex-direction:column;ga
         <div class="tcard-head"><h3>Consultas</h3><span class="role fact">Fato</span></div>
         <p>Uma linha por consulta agendada entre 29/04 e 08/06/2016, já limpa no notebook 02 (13 registros com erro removidos). É a base da visão histórica e dos filtros de perfil.</p>
         <div class="chips"><span class="chip"><b>110.514</b> linhas</span><span class="chip"><b>25</b> colunas</span>
-          <span class="chip"><b>8</b> medidas</span><span class="chip">origem: <b>pbi_consultas.csv</b></span></div>
+          <span class="chip"><b>32</b> medidas</span><span class="chip">origem: <b>pbi_consultas.csv</b></span></div>
         <div class="tw"><table><thead><tr><th>Campo</th><th>Tipo</th><th>Marcadores</th><th>Formato</th><th>Descrição</th></tr></thead><tbody><tr><td><code>consulta_id</code></td><td>Inteiro</td><td><span class="tag pk">PK</span> <span class="tag hid">oculta</span></td><td><code class="fmt">—</code></td><td>Identificador da consulta.</td></tr><tr><td><code>data_consulta</code></td><td>Data</td><td></td><td><code class="fmt">dd/MM/yyyy</code></td><td>Data da consulta.</td></tr><tr><td><code>data_agendamento</code></td><td>Data</td><td></td><td><code class="fmt">dd/MM/yyyy</code></td><td>Data em que a consulta foi marcada.</td></tr><tr><td><code>dia_semana</code></td><td>Texto</td><td><span class="tag hid">oculta</span></td><td><code class="fmt">—</code></td><td>Dia da semana por extenso.</td></tr><tr><td><code>antecedencia_dias</code></td><td>Inteiro</td><td></td><td><code class="fmt">—</code></td><td>Dias entre o agendamento e a consulta.</td></tr><tr><td><code>faixa_antecedencia</code></td><td>Texto</td><td><span class="tag hid">oculta</span></td><td><code class="fmt">—</code></td><td>Faixa de antecedência com prefixo numérico para ordenar.</td></tr><tr><td><code>idade</code></td><td>Inteiro</td><td></td><td><code class="fmt">—</code></td><td>Idade do paciente na data da consulta.</td></tr><tr><td><code>faixa_etaria</code></td><td>Texto</td><td></td><td><code class="fmt">—</code></td><td>Faixa etária: 0-12, 13-18, 19-29, 30-44, 45-59, 60+.</td></tr><tr><td><code>sexo</code></td><td>Texto</td><td></td><td><code class="fmt">—</code></td><td>Feminino ou Masculino.</td></tr><tr><td><code>bairro</code></td><td>Texto</td><td></td><td><code class="fmt">—</code></td><td>Bairro da unidade de saúde.</td></tr><tr><td><code>bolsa_familia</code></td><td>Inteiro</td><td></td><td><code class="fmt">—</code></td><td>1 se recebe Bolsa Família.</td></tr><tr><td><code>hipertensao</code></td><td>Inteiro</td><td></td><td><code class="fmt">—</code></td><td>1 se tem hipertensão.</td></tr><tr><td><code>diabetes</code></td><td>Inteiro</td><td></td><td><code class="fmt">—</code></td><td>1 se tem diabetes.</td></tr><tr><td><code>alcoolismo</code></td><td>Inteiro</td><td></td><td><code class="fmt">—</code></td><td>1 se tem registro de alcoolismo.</td></tr><tr><td><code>deficiencia</code></td><td>Inteiro</td><td></td><td><code class="fmt">—</code></td><td>1 se tem alguma deficiência.</td></tr><tr><td><code>sms_recebido</code></td><td>Inteiro</td><td></td><td><code class="fmt">—</code></td><td>1 se recebeu lembrete por SMS.</td></tr><tr><td><code>historico</code></td><td>Texto</td><td><span class="tag hid">oculta</span></td><td><code class="fmt">—</code></td><td>Primeira consulta, já veio e nunca faltou, ou já faltou antes.</td></tr><tr><td><code>faltou</code></td><td>Inteiro</td><td></td><td><code class="fmt">—</code></td><td>1 se faltou. Variável alvo do modelo.</td></tr><tr><td><code>periodo</code></td><td>Texto</td><td></td><td><code class="fmt">—</code></td><td>Histórico (treino) ou semana de teste.</td></tr><tr><td><code>Dia da semana</code></td><td>Texto</td><td><span class="tag calc">calculada</span> <span class="tag">ordena por dia_ordem</span></td><td><code class="fmt">—</code></td><td>Rótulo curto do dia, ordenado de segunda a sábado.</td></tr><tr><td><code>dia_ordem</code></td><td>Inteiro</td><td><span class="tag calc">calculada</span> <span class="tag hid">oculta</span></td><td><code class="fmt">—</code></td><td>Ordem do dia (1 a 6).</td></tr><tr><td><code>Antecedência</code></td><td>Texto</td><td><span class="tag calc">calculada</span> <span class="tag">ordena por faixa_antecedencia</span></td><td><code class="fmt">—</code></td><td>Faixa de antecedência para exibição.</td></tr><tr><td><code>SMS</code></td><td>Texto</td><td><span class="tag calc">calculada</span></td><td><code class="fmt">—</code></td><td>Com SMS ou Sem SMS, para filtros.</td></tr><tr><td><code>historico_ordem</code></td><td>Inteiro</td><td><span class="tag calc">calculada</span> <span class="tag hid">oculta</span></td><td><code class="fmt">—</code></td><td>Ordem das categorias de histórico.</td></tr><tr><td><code>Histórico do paciente</code></td><td>Texto</td><td><span class="tag calc">calculada</span> <span class="tag">ordena por historico_ordem</span></td><td><code class="fmt">—</code></td><td>Histórico para exibição, ordenado.</td></tr></tbody></table></div>
         <details><summary>Ver a consulta Power Query (M)</summary><pre class="m">let
 Fonte = Csv.Document(File.Contents(&quot;D:\Projetos IA\Projeto 2 Saude\powerbi\pbi_consultas.csv&quot;), [Delimiter=&quot;;&quot;, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
@@ -220,7 +223,7 @@ Tipos</pre></details>
         <div class="tcard-head"><h3>Agenda</h3><span class="role fact2">Fato da semana de teste</span></div>
         <p>As consultas da semana de teste (30/05 a 08/06/2016) com o risco previsto pelo modelo do notebook 03 e a ação de menor custo escolhida pela regra do notebook 05.</p>
         <div class="chips"><span class="chip"><b>35.240</b> linhas</span><span class="chip"><b>12</b> colunas</span>
-          <span class="chip"><b>9</b> medidas</span><span class="chip">origem: <b>pbi_acoes.csv</b></span></div>
+          <span class="chip"><b>11</b> medidas</span><span class="chip">origem: <b>pbi_acoes.csv</b></span></div>
         <div class="tw"><table><thead><tr><th>Campo</th><th>Tipo</th><th>Marcadores</th><th>Formato</th><th>Descrição</th></tr></thead><tbody><tr><td><code>consulta_id</code></td><td>Inteiro</td><td><span class="tag fk">FK</span> <span class="tag hid">oculta</span></td><td><code class="fmt">—</code></td><td>Identificador da consulta; chave estrangeira para Consultas.</td></tr><tr><td><code>data_consulta</code></td><td>Data</td><td></td><td><code class="fmt">dd/MM/yyyy</code></td><td>Data da consulta.</td></tr><tr><td><code>risco</code></td><td>Decimal</td><td></td><td><code class="fmt">0.0%</code></td><td>Probabilidade de falta prevista pelo Gradient Boosting.</td></tr><tr><td><code>faltou</code></td><td>Inteiro</td><td></td><td><code class="fmt">—</code></td><td>1 se faltou de fato.</td></tr><tr><td><code>acao</code></td><td>Texto</td><td><span class="tag hid">oculta</span></td><td><code class="fmt">—</code></td><td>Ação de menor custo esperado.</td></tr><tr><td><code>custo_esperado_acao</code></td><td>Decimal</td><td><span class="tag hid">oculta</span></td><td><code class="fmt">—</code></td><td>Custo esperado com a ação escolhida.</td></tr><tr><td><code>custo_esperado_sem_acao</code></td><td>Decimal</td><td><span class="tag hid">oculta</span></td><td><code class="fmt">—</code></td><td>Custo esperado sem nenhuma ação.</td></tr><tr><td><code>faixa_risco</code></td><td>Texto</td><td><span class="tag hid">oculta</span></td><td><code class="fmt">—</code></td><td>Faixa de risco com prefixo para ordenar.</td></tr><tr><td><code>economia_esperada</code></td><td>Decimal</td><td><span class="tag hid">oculta</span></td><td><code class="fmt">—</code></td><td>Custo sem ação menos custo com a ação.</td></tr><tr><td><code>Faixa de risco</code></td><td>Texto</td><td><span class="tag calc">calculada</span> <span class="tag">ordena por faixa_risco</span></td><td><code class="fmt">—</code></td><td>Faixa de risco para exibição.</td></tr><tr><td><code>acao_ordem</code></td><td>Inteiro</td><td><span class="tag calc">calculada</span> <span class="tag hid">oculta</span></td><td><code class="fmt">—</code></td><td>Ordem das ações, da mais leve à mais intensa.</td></tr><tr><td><code>Ação recomendada</code></td><td>Texto</td><td><span class="tag calc">calculada</span> <span class="tag">ordena por acao_ordem</span></td><td><code class="fmt">—</code></td><td>Ação para exibição, ordenada.</td></tr></tbody></table></div>
         <details><summary>Ver a consulta Power Query (M)</summary><pre class="m">let
 Fonte = Csv.Document(File.Contents(&quot;D:\Projetos IA\Projeto 2 Saude\powerbi\pbi_acoes.csv&quot;), [Delimiter=&quot;;&quot;, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
@@ -318,7 +321,7 @@ Fonte</pre></details>
     </section>
 
     <section id="medidas">
-      <div class="sec-head"><span class="eyebrow">05</span><h2>Catálogo de medidas</h2><p>17 medidas organizadas em pastas. Valor atual: sem nenhum filtro aplicado.</p></div>
+      <div class="sec-head"><span class="eyebrow">05</span><h2>Catálogo de medidas</h2><p>43 medidas organizadas em pastas. Valor atual: sem nenhum filtro aplicado.</p></div>
       <div class="folder"><div class="folder-head"><h3>📁 Histórico</h3><span class="muted">5 medidas · Base inteira, para a visão geral.</span></div><div class="mgrid"><article class="mcard"><div class="mtop"><span class="mname">Consultas</span>
         <span class="mval">valor atual <b>110.514</b><code class="fmt">#,0</code></span></div>
         <p class="mdesc">Consultas no contexto de filtro.</p><pre class="dax"><span class="k-fn">COUNTROWS</span>(Consultas)</pre></article><article class="mcard"><div class="mtop"><span class="mname">Faltas</span>
@@ -335,7 +338,59 @@ Fonte</pre></details>
         <span class="mval">valor atual <b>16,7%</b><code class="fmt">0.0%</code></span></div>
         <p class="mdesc">Taxa de falta só das consultas sem SMS.</p><pre class="dax"><span class="k-fn">CALCULATE</span>(<span class="k-ref">[Taxa de falta]</span>, <span class="k-ref">Consultas[sms_recebido]</span> = <span class="k-num">0</span>)</pre></article><article class="mcard"><div class="mtop"><span class="mname">% com SMS</span>
         <span class="mval">valor atual <b>32,1%</b><code class="fmt">0.0%</code></span></div>
-        <p class="mdesc">Parcela das consultas que recebeu SMS.</p><pre class="dax"><span class="k-fn">DIVIDE</span>(<span class="k-fn">CALCULATE</span>(<span class="k-ref">[Consultas]</span>, <span class="k-ref">Consultas[sms_recebido]</span> = <span class="k-num">1</span>), <span class="k-ref">[Consultas]</span>)</pre></article></div></div><div class="folder"><div class="folder-head"><h3>📁 Agenda</h3><span class="muted">9 medidas · Semana de teste e regra de próxima melhor ação.</span></div><div class="mgrid"><article class="mcard"><div class="mtop"><span class="mname">Consultas na agenda</span>
+        <p class="mdesc">Parcela das consultas que recebeu SMS.</p><pre class="dax"><span class="k-fn">DIVIDE</span>(<span class="k-fn">CALCULATE</span>(<span class="k-ref">[Consultas]</span>, <span class="k-ref">Consultas[sms_recebido]</span> = <span class="k-num">1</span>), <span class="k-ref">[Consultas]</span>)</pre></article></div></div><div class="folder"><div class="folder-head"><h3>📁 Visual</h3><span class="muted">26 medidas · Textos e cores do layout: etiquetas, setas e formatação condicional.</span></div><div class="mgrid"><article class="mcard"><div class="mtop"><span class="mname">Txt bairros</span>
+        <span class="mval">valor atual <b>81 bairros</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Texto com o número de bairros no filtro (card de consultas).</p><pre class="dax"><span class="k-fn">FORMAT</span>(<span class="k-fn">DISTINCTCOUNT</span>(<span class="k-ref">Consultas[bairro]</span>), <span class="k-str">&quot;<span class="k-num">0</span>&quot;</span>) &amp; <span class="k-str">&quot; bairros&quot;</span></pre></article><article class="mcard"><div class="mtop"><span class="mname">Txt dias</span>
+        <span class="mval">valor atual <b>27 dias com consulta</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Texto com o número de dias com consulta.</p><pre class="dax"><span class="k-fn">FORMAT</span>(<span class="k-fn">DISTINCTCOUNT</span>(<span class="k-ref">Consultas[data_consulta]</span>), <span class="k-str">&quot;<span class="k-num">0</span>&quot;</span>) &amp; <span class="k-str">&quot; dias com consulta&quot;</span></pre></article><article class="mcard"><div class="mtop"><span class="mname">Txt horários vagos</span>
+        <span class="mval">valor atual <b>22.311 horários vagos</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Texto com o total de faltas.</p><pre class="dax"><span class="k-fn">FORMAT</span>(<span class="k-ref">[Faltas]</span>, <span class="k-str">&quot;#,<span class="k-num">0</span>&quot;</span>) &amp; <span class="k-str">&quot; horários vagos&quot;</span></pre></article><article class="mcard"><div class="mtop"><span class="mname">Txt 1 em N</span>
+        <span class="mval">valor atual <b>1 em 5</b><code class="fmt"></code></span></div>
+        <p class="mdesc">A taxa de falta dita como &quot;1 em N&quot;.</p><pre class="dax"><span class="k-fn">IF</span>(<span class="k-ref">[Taxa de falta]</span> &gt; <span class="k-num">0</span>, <span class="k-str">&quot;<span class="k-num">1</span> em &quot;</span> &amp; <span class="k-fn">FORMAT</span>(<span class="k-fn">ROUND</span>(<span class="k-fn">DIVIDE</span>(<span class="k-num">1</span>, <span class="k-ref">[Taxa de falta]</span>), <span class="k-num">0</span>), <span class="k-str">&quot;<span class="k-num">0</span>&quot;</span>))</pre></article><article class="mcard"><div class="mtop"><span class="mname">Txt consultas</span>
+        <span class="mval">valor atual <b>110.514 consultas</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Texto com o número de consultas (infográfico e histórico).</p><pre class="dax"><span class="k-fn">FORMAT</span>(<span class="k-ref">[Consultas]</span>, <span class="k-str">&quot;#,<span class="k-num">0</span>&quot;</span>) &amp; <span class="k-str">&quot; consultas&quot;</span></pre></article><article class="mcard"><div class="mtop"><span class="mname">Dif mesmo dia</span>
+        <span class="mval">valor atual <b>−15,5</b><code class="fmt">0.0</code></span></div>
+        <p class="mdesc">Diferença em pontos percentuais entre a falta no mesmo dia e a taxa geral.</p><pre class="dax">(<span class="k-ref">[Taxa de falta no mesmo dia]</span> - <span class="k-ref">[Taxa de falta]</span>) * <span class="k-num">100</span></pre></article><article class="mcard"><div class="mtop"><span class="mname">Dif 8+ dias</span>
+        <span class="mval">valor atual <b>11,9</b><code class="fmt">0.0</code></span></div>
+        <p class="mdesc">Diferença em p.p. entre a falta com 8+ dias e a taxa geral.</p><pre class="dax">(<span class="k-ref">[Taxa de falta com <span class="k-num">8</span>+ dias]</span> - <span class="k-ref">[Taxa de falta]</span>) * <span class="k-num">100</span></pre></article><article class="mcard"><div class="mtop"><span class="mname">Taxa última semana</span>
+        <span class="mval">valor atual <b>18,5%</b><code class="fmt">0.0%</code></span></div>
+        <p class="mdesc">Taxa de falta nos últimos 7 dias do período filtrado.</p><pre class="dax">VAR fim = <span class="k-fn">MAX</span>(<span class="k-ref">Consultas[data_consulta]</span>) RETURN <span class="k-fn">CALCULATE</span>(<span class="k-ref">[Taxa de falta]</span>, <span class="k-fn">KEEPFILTERS</span>(<span class="k-ref">Consultas[data_consulta]</span> &gt; fim - <span class="k-num">7</span>))</pre></article><article class="mcard"><div class="mtop"><span class="mname">Dif última semana</span>
+        <span class="mval">valor atual <b>−1,7</b><code class="fmt">0.0</code></span></div>
+        <p class="mdesc">Diferença em p.p. entre os últimos 7 dias e o período inteiro.</p><pre class="dax">(<span class="k-ref">[Taxa última semana]</span> - <span class="k-ref">[Taxa de falta]</span>) * <span class="k-num">100</span></pre></article><article class="mcard"><div class="mtop"><span class="mname">Dif vs geral</span>
+        <span class="mval">valor atual <b>0,0</b><code class="fmt">0.0</code></span></div>
+        <p class="mdesc">Diferença em p.p. entre a faixa etária e todas as faixas juntas.</p><pre class="dax">(<span class="k-ref">[Taxa de falta]</span> - <span class="k-fn">CALCULATE</span>(<span class="k-ref">[Taxa de falta]</span>, <span class="k-fn">REMOVEFILTERS</span>(<span class="k-ref">Consultas[faixa_etaria]</span>))) * <span class="k-num">100</span></pre></article><article class="mcard"><div class="mtop"><span class="mname">Txt dif mesmo dia</span>
+        <span class="mval">valor atual <b>▼ 15,5 p.p.</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Etiqueta com seta para o card de falta no mesmo dia.</p><pre class="dax">VAR d = <span class="k-ref">[Dif mesmo dia]</span> RETURN <span class="k-fn">IF</span>(d &lt; <span class="k-num">0</span>, <span class="k-str">&quot;▼ &quot;</span>, <span class="k-str">&quot;▲ &quot;</span>) &amp; <span class="k-fn">FORMAT</span>(<span class="k-fn">ABS</span>(d), <span class="k-str">&quot;<span class="k-num">0.0</span>&quot;</span>) &amp; <span class="k-str">&quot; p.p.&quot;</span></pre></article><article class="mcard"><div class="mtop"><span class="mname">Txt dif 8+ dias</span>
+        <span class="mval">valor atual <b>▲ 11,9 p.p.</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Etiqueta com seta para o card de falta com 8+ dias.</p><pre class="dax">VAR d = <span class="k-ref">[Dif <span class="k-num">8</span>+ dias]</span> RETURN <span class="k-fn">IF</span>(d &lt; <span class="k-num">0</span>, <span class="k-str">&quot;▼ &quot;</span>, <span class="k-str">&quot;▲ &quot;</span>) &amp; <span class="k-fn">FORMAT</span>(<span class="k-fn">ABS</span>(d), <span class="k-str">&quot;<span class="k-num">0.0</span>&quot;</span>) &amp; <span class="k-str">&quot; p.p.&quot;</span></pre></article><article class="mcard"><div class="mtop"><span class="mname">Txt dif última semana</span>
+        <span class="mval">valor atual <b>▼ 1,7 p.p.</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Etiqueta com seta da última semana.</p><pre class="dax">VAR d = <span class="k-ref">[Dif última semana]</span> RETURN <span class="k-fn">IF</span>(d &lt; <span class="k-num">0</span>, <span class="k-str">&quot;▼ &quot;</span>, <span class="k-str">&quot;▲ &quot;</span>) &amp; <span class="k-fn">FORMAT</span>(<span class="k-fn">ABS</span>(d), <span class="k-str">&quot;<span class="k-num">0.0</span>&quot;</span>) &amp; <span class="k-str">&quot; p.p.&quot;</span></pre></article><article class="mcard"><div class="mtop"><span class="mname">Txt dif vs geral</span>
+        <span class="mval">valor atual <b>≈ média</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Etiqueta do infográfico; &quot;≈ média&quot; quando a diferença é menor que 0,5 p.p.</p><pre class="dax">VAR d = <span class="k-ref">[Dif vs geral]</span> RETURN <span class="k-fn">IF</span>(<span class="k-fn">ABS</span>(d) &lt; <span class="k-num">0.5</span>, <span class="k-str">&quot;≈ média&quot;</span>, <span class="k-fn">IF</span>(d &lt; <span class="k-num">0</span>, <span class="k-str">&quot;▼ −&quot;</span>, <span class="k-str">&quot;▲ +&quot;</span>) &amp; <span class="k-fn">FORMAT</span>(<span class="k-fn">ABS</span>(d), <span class="k-str">&quot;<span class="k-num">0.0</span>&quot;</span>) &amp; <span class="k-str">&quot; p.p.&quot;</span>)</pre></article><article class="mcard"><div class="mtop"><span class="mname">Cor dif mesmo dia</span>
+        <span class="mval">valor atual <b>#1E8A55</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Cor da etiqueta: verde se menor que a taxa geral, vermelho se maior.</p><pre class="dax"><span class="k-fn">IF</span>(<span class="k-ref">[Dif mesmo dia]</span> &lt; <span class="k-num">0</span>, <span class="k-str">&quot;#1E8A55&quot;</span>, <span class="k-str">&quot;#C2453F&quot;</span>)</pre></article><article class="mcard"><div class="mtop"><span class="mname">Fundo dif mesmo dia</span>
+        <span class="mval">valor atual <b>#E4F5EC</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Fundo da etiqueta, no mesmo critério.</p><pre class="dax"><span class="k-fn">IF</span>(<span class="k-ref">[Dif mesmo dia]</span> &lt; <span class="k-num">0</span>, <span class="k-str">&quot;#E4F5EC&quot;</span>, <span class="k-str">&quot;#FBE0DF&quot;</span>)</pre></article><article class="mcard"><div class="mtop"><span class="mname">Cor dif 8+ dias</span>
+        <span class="mval">valor atual <b>#C2453F</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Cor da etiqueta de 8+ dias.</p><pre class="dax"><span class="k-fn">IF</span>(<span class="k-ref">[Dif <span class="k-num">8</span>+ dias]</span> &lt; <span class="k-num">0</span>, <span class="k-str">&quot;#1E8A55&quot;</span>, <span class="k-str">&quot;#C2453F&quot;</span>)</pre></article><article class="mcard"><div class="mtop"><span class="mname">Fundo dif 8+ dias</span>
+        <span class="mval">valor atual <b>#FBE0DF</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Fundo da etiqueta de 8+ dias.</p><pre class="dax"><span class="k-fn">IF</span>(<span class="k-ref">[Dif <span class="k-num">8</span>+ dias]</span> &lt; <span class="k-num">0</span>, <span class="k-str">&quot;#E4F5EC&quot;</span>, <span class="k-str">&quot;#FBE0DF&quot;</span>)</pre></article><article class="mcard"><div class="mtop"><span class="mname">Cor dif última semana</span>
+        <span class="mval">valor atual <b>#1E8A55</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Cor da etiqueta da última semana.</p><pre class="dax"><span class="k-fn">IF</span>(<span class="k-ref">[Dif última semana]</span> &lt; <span class="k-num">0</span>, <span class="k-str">&quot;#1E8A55&quot;</span>, <span class="k-str">&quot;#C2453F&quot;</span>)</pre></article><article class="mcard"><div class="mtop"><span class="mname">Fundo dif última semana</span>
+        <span class="mval">valor atual <b>#E4F5EC</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Fundo da etiqueta da última semana.</p><pre class="dax"><span class="k-fn">IF</span>(<span class="k-ref">[Dif última semana]</span> &lt; <span class="k-num">0</span>, <span class="k-str">&quot;#E4F5EC&quot;</span>, <span class="k-str">&quot;#FBE0DF&quot;</span>)</pre></article><article class="mcard"><div class="mtop"><span class="mname">Cor dif vs geral</span>
+        <span class="mval">valor atual <b>#5E7472</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Cor do infográfico: verde até −2 p.p., vermelho a partir de +2 p.p., cinza entre os dois.</p><pre class="dax">VAR d = <span class="k-ref">[Dif vs geral]</span> RETURN <span class="k-fn">SWITCH</span>(<span class="k-fn">TRUE</span>(), d &lt;= -<span class="k-num">2</span>, <span class="k-str">&quot;#1E8A55&quot;</span>, d &gt;= <span class="k-num">2</span>, <span class="k-str">&quot;#C2453F&quot;</span>, <span class="k-str">&quot;#5E7472&quot;</span>)</pre></article><article class="mcard"><div class="mtop"><span class="mname">Fundo dif vs geral</span>
+        <span class="mval">valor atual <b>#EEF1F4</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Fundo da etiqueta do infográfico, no mesmo critério.</p><pre class="dax">VAR d = <span class="k-ref">[Dif vs geral]</span> RETURN <span class="k-fn">SWITCH</span>(<span class="k-fn">TRUE</span>(), d &lt;= -<span class="k-num">2</span>, <span class="k-str">&quot;#E4F5EC&quot;</span>, d &gt;= <span class="k-num">2</span>, <span class="k-str">&quot;#FBE0DF&quot;</span>, <span class="k-str">&quot;#EEF1F4&quot;</span>)</pre></article><article class="mcard"><div class="mtop"><span class="mname">Cor dia da semana</span>
+        <span class="mval">valor atual <b>por dia</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Verde-lima no dia de maior taxa entre os visíveis, verde-água nos demais.</p><pre class="dax">VAR t = <span class="k-ref">[Taxa de falta]</span> VAR mx = <span class="k-fn">MAXX</span>(<span class="k-fn">ALLSELECTED</span>(<span class="k-ref">Consultas[Dia da semana]</span>, <span class="k-ref">Consultas[dia_ordem]</span>), <span class="k-ref">[Taxa de falta]</span>) RETURN <span class="k-fn">IF</span>(t = mx, <span class="k-str">&quot;#8DB63C&quot;</span>, <span class="k-str">&quot;#2F9C88&quot;</span>)</pre></article><article class="mcard"><div class="mtop"><span class="mname">Cor antecedência</span>
+        <span class="mval">valor atual <b>por faixa</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Verde-água abaixo de 15%, lavanda de 15% a 30%, rosa acima de 30%.</p><pre class="dax">VAR t = <span class="k-ref">[Taxa de falta]</span> RETURN <span class="k-fn">SWITCH</span>(<span class="k-fn">TRUE</span>(), t &lt; <span class="k-num">0.15</span>, <span class="k-str">&quot;#7FCDBD&quot;</span>, t &lt; <span class="k-num">0.30</span>, <span class="k-str">&quot;#B4B2F0&quot;</span>, <span class="k-str">&quot;#F0A3A1&quot;</span>)</pre></article><article class="mcard"><div class="mtop"><span class="mname">Txt economia %</span>
+        <span class="mval">valor atual <b>20,0% do custo sem ação</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Economia esperada como % do custo sem ação.</p><pre class="dax"><span class="k-fn">FORMAT</span>(<span class="k-ref">[Economia esperada %]</span>, <span class="k-str">&quot;<span class="k-num">0.0</span>%&quot;</span>) &amp; <span class="k-str">&quot; do custo sem ação&quot;</span></pre></article><article class="mcard"><div class="mtop"><span class="mname">Txt alto risco %</span>
+        <span class="mval">valor atual <b>30,1% da agenda</b><code class="fmt"></code></span></div>
+        <p class="mdesc">Consultas de alto risco como % da agenda.</p><pre class="dax"><span class="k-fn">FORMAT</span>(<span class="k-fn">DIVIDE</span>(<span class="k-ref">[Consultas de alto risco]</span>, <span class="k-ref">[Consultas na agenda]</span>), <span class="k-str">&quot;<span class="k-num">0.0</span>%&quot;</span>) &amp; <span class="k-str">&quot; da agenda&quot;</span></pre></article></div></div><div class="folder"><div class="folder-head"><h3>📁 Agenda</h3><span class="muted">9 medidas · Semana de teste e regra de próxima melhor ação.</span></div><div class="mgrid"><article class="mcard"><div class="mtop"><span class="mname">Consultas na agenda</span>
         <span class="mval">valor atual <b>35.240</b><code class="fmt">#,0</code></span></div>
         <p class="mdesc">Consultas da semana de teste.</p><pre class="dax"><span class="k-fn">COUNTROWS</span>(Agenda)</pre></article><article class="mcard"><div class="mtop"><span class="mname">% da agenda</span>
         <span class="mval">valor atual <b>100,0%</b><code class="fmt">0.0%</code></span></div>
@@ -403,9 +458,9 @@ Fonte</pre></details>
     <section id="paginas">
       <div class="sec-head"><span class="eyebrow">09</span><h2>Páginas do relatório</h2></div>
       <div class="tw"><table><thead><tr><th>Página</th><th>Pergunta que responde</th><th>Visuais</th><th>Filtros</th></tr></thead><tbody>
-        <tr><td><b>Visão geral</b></td><td>Quanto se falta e onde se concentra?</td><td>4 KPIs, área por dia, colunas por antecedência, rosca por histórico, barras por idade e bairro</td><td>Sexo, faixa etária, bairro, SMS, data</td></tr>
+        <tr><td><b>Visão geral</b></td><td>Quanto se falta e onde se concentra?</td><td>4 cards com etiquetas de diferença, linha diária com o histórico do paciente, infográfico de faixa etária, colunas por dia da semana e por antecedência</td><td>Período, sexo, faixa etária, bairro, SMS</td></tr>
         <tr><td><b>O paradoxo do SMS</b></td><td>O SMS reduz faltas?</td><td>3 KPIs, colunas com e sem SMS por faixa, linha de quem recebe SMS, nota</td><td>Sexo, faixa etária, bairro, histórico</td></tr>
-        <tr><td><b>Agenda da semana</b></td><td>O que fazer com cada consulta?</td><td>5 KPIs, rosca por ação, combinado consultas × falta real por faixa, tabela por ação, nota</td><td>Ação, faixa de risco, faixa etária, bairro, data</td></tr>
+        <tr><td><b>Agenda da semana</b></td><td>O que fazer com cada consulta?</td><td>5 KPIs, rosca por ação, combinado consultas × falta real por faixa, tabela por ação, nota</td><td>Ação, faixa de risco, faixa etária, bairro</td></tr>
         <tr><td><b>Premissas e modelo</b></td><td>Em que premissas e modelo isso se apoia?</td><td>4 KPIs, tabelas de premissas e modelos, regra e limitações</td><td>—</td></tr>
       </tbody></table></div>
     </section>
@@ -417,7 +472,7 @@ Fonte</pre></details>
         <div class="issue"><span class="pill hi">Alta</span><h3>Calibração do risco</h3><p>Nas faixas acima de 30% o risco previsto passa da falta real. Recalibrar com dados recentes antes de decidir encaixes.</p></div>
         <div class="issue"><span class="pill md">Média</span><h3>Caminho fixo dos arquivos</h3><p>As consultas apontam para <code>D:\Projetos IA\Projeto 2 Saude\powerbi\</code>. Trocar por um parâmetro do Power Query.</p></div>
         <div class="issue"><span class="pill md">Média</span><h3>Tabela Modelos digitada</h3><p>Métricas copiadas dos notebooks 03 e 04. Se os modelos forem retreinados, atualizar ou passar a ler um CSV.</p></div>
-        <div class="issue"><span class="pill lo">Baixa</span><h3>Visuais ocultos antigos</h3><p>14 visuais vazios e ocultos da primeira versão do layout. Podem ser apagados no painel Seleção.</p></div>
+        <div class="issue"><span class="pill lo">Baixa</span><h3>Visuais ocultos antigos</h3><p>29 caixas vazias e ocultas que sobraram das versões anteriores do layout (páginas 2 a 4). Podem ser apagadas no painel Seleção.</p></div>
         <div class="issue"><span class="pill lo">Baixa</span><h3>Encaixe tem custo humano</h3><p>Em saúde pública, só faz sentido com fila de espera ativa e limite de encaixes por turno.</p></div>
       </div>
     </section>
@@ -428,6 +483,7 @@ Fonte</pre></details>
         <tr><td>11/10/2026</td><td>0.1</td><td>Modelo criado: 4 tabelas, relação Consultas → Agenda, 17 medidas e colunas de ordenação.</td></tr>
         <tr><td>11/10/2026</td><td>0.2</td><td>Primeiro layout de 4 páginas.</td></tr>
         <tr><td>11/10/2026</td><td>1.0</td><td>Tema próprio, ícones SVG, cards coloridos, filtros por página; relatório publicado na web.</td></tr>
+        <tr><td>11/10/2026</td><td>1.1</td><td>Layout "Presença": fundo desenhado, menu lateral com navegação, paleta pastel, infográfico de faixa etária e 26 medidas de texto e cor (pasta Visual).</td></tr>
       </tbody></table></div>
     </section>
 
