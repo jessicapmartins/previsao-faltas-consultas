@@ -1,0 +1,249 @@
+<title>Documentação · Painel de Faltas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: documentação técnica com índice lateral fixo no desktop e conteúdo em coluna única legível */
+:root{
+  --bg:#F5F7FA; --surface:#FFFFFF; --ink:#13233A; --muted:#5B6B7F; --line:#DCE3EC;
+  --navy:#13315C; --teal:#0E8A7C; --teal-soft:#DDF1EE; --coral:#D9573B; --amber:#B7791F; --code:#EEF2F7;
+  --display:"Familjen Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1420; --surface:#141E2D; --ink:#E3EAF3; --muted:#9AA9BC; --line:#25334A;
+  --navy:#8DB4F0; --teal:#3CC3B1; --teal-soft:#16352F; --coral:#F07A5E; --amber:#E2A33B; --code:#1A2638; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1420; --surface:#141E2D; --ink:#E3EAF3; --muted:#9AA9BC; --line:#25334A;
+  --navy:#8DB4F0; --teal:#3CC3B1; --teal-soft:#16352F; --coral:#F07A5E; --amber:#E2A33B; --code:#1A2638; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.layout{max-width:1220px;margin:0 auto;padding-inline:clamp(16px,3vw,32px);padding-block:28px 64px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px}
+@media (max-width:900px){.layout{grid-template-columns:1fr}.toc{position:static!important}}
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px);align-self:start;display:grid;gap:4px;font-size:.92rem}
+.toc .lbl{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.toc a{color:var(--ink);text-decoration:none;padding:4px 10px;border-left:2px solid var(--line)}
+.toc a:hover,.toc a:focus-visible{border-left-color:var(--teal);color:var(--teal);outline:none}
+main{display:grid;gap:40px;min-width:0}
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.1}
+h2{font-size:1.5rem;padding-bottom:8px;border-bottom:1px solid var(--line)}
+h3{font-size:1.15rem}
+h4{font-size:1rem}
+p{margin:0;max-width:72ch}
+.eyebrow{font-family:var(--mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.intro{display:grid;gap:12px}
+.lede{font-size:1.08rem;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:8px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:1.5rem;font-weight:500;color:var(--navy)}
+.stat span{font-size:.85rem;color:var(--muted)}
+section{display:grid;gap:14px;min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:grid;gap:10px;min-width:0}
+.th{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px}
+.meta{font-size:.84rem;color:var(--muted)}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+code{font-family:var(--mono);font-size:.86em;background:var(--code);padding:1px 5px;border-radius:4px}
+pre{margin:0;background:var(--code);border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:.84rem;line-height:1.55}
+pre code{background:none;padding:0}
+code.dax{white-space:pre-wrap;background:none;padding:0}
+details summary{cursor:pointer;color:var(--teal);font-size:.9rem}
+details pre{margin-top:8px}
+.pill{display:inline-block;font-size:.72rem;padding:1px 8px;border-radius:999px;margin-left:4px;vertical-align:1px;font-family:var(--body)}
+.pill.calc{background:var(--teal-soft);color:var(--teal)}
+.pill.hid{border:1px solid var(--line);color:var(--muted)}
+.pill.ok{background:var(--teal-soft);color:var(--teal)}
+.measures{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px}
+.measure pre{white-space:pre-wrap;word-break:break-word}
+.measure{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:8px;min-width:0}
+.measure header{display:grid;gap:2px}
+.figure{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;overflow-x:auto}
+.figure svg{display:block;min-width:680px;width:100%;height:auto}
+.figure text{font-family:var(--body);fill:var(--ink)}
+.figure .sm{font-size:12px;fill:var(--muted)}
+.box{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.box.k{fill:var(--teal-soft);stroke:var(--teal)}
+.arrow{stroke:var(--muted);stroke-width:1.6;fill:none}
+.list{display:grid;gap:10px;padding-left:20px;margin:0}
+.list li{max-width:72ch}
+.warn{border-left:3px solid var(--amber);padding:2px 0 2px 14px}
+footer{font-size:.86rem;color:var(--muted);display:grid;gap:4px}
+footer a,main a{color:var(--teal)}
+</style>
+
+<div class="layout">
+  <nav class="toc" aria-label="Índice">
+    <span class="lbl">Nesta documentação</span>
+    <a href="#visao">Visão geral</a><a href="#arquitetura">Arquitetura</a><a href="#modelo">Modelo de dados</a>
+    <a href="#tabelas">Tabelas</a><a href="#medidas">Medidas DAX</a><a href="#calculadas">Colunas calculadas</a>
+    <a href="#paginas">Páginas do relatório</a><a href="#decisoes">Decisões de modelagem</a><a href="#atencao">Pontos de atenção</a>
+    <a href="#validacao">Validação</a><a href="#atualizar">Como atualizar</a>
+  </nav>
+
+  <main>
+    <header class="intro" id="visao">
+      <span class="eyebrow">Documentação técnica · Power BI</span>
+      <h1>Painel de faltas em consultas</h1>
+      <p class="lede">Modelo semântico e relatório do projeto de previsão de faltas: 110 mil consultas da rede pública de Vitória (ES), o risco previsto por um modelo de Machine Learning e a ação recomendada para cada consulta.</p>
+      <p>Esta documentação foi gerada por um script que lê os arquivos do projeto Power BI (formato .pbip, TMDL). A estrutura, os tipos e as fórmulas DAX vêm direto do modelo; as descrições de negócio foram escritas à parte.</p>
+      <div class="stats">
+        <div class="stat"><b>4</b><span>tabelas</span></div>
+        <div class="stat"><b>46</b><span>colunas</span></div>
+        <div class="stat"><b>17</b><span>medidas DAX</span></div>
+        <div class="stat"><b>9</b><span>colunas calculadas</span></div>
+        <div class="stat"><b>1</b><span>relação</span></div>
+        <div class="stat"><b>4</b><span>páginas</span></div>
+      </div>
+    </header>
+
+    <section id="arquitetura">
+      <h2>Arquitetura</h2>
+      <p>Os dados são preparados em Python (notebooks do projeto) e chegam ao Power BI como arquivos CSV no padrão brasileiro. O Power Query só lê e tipa as colunas: toda a lógica pesada fica nos notebooks.</p>
+      <div class="figure">
+        <svg viewBox="0 0 900 190" role="img" aria-label="Fluxo: notebooks Python geram CSVs, lidos pelo Power Query, que alimenta o modelo e as páginas publicadas">
+          <defs><marker id="ah" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="var(--muted)"/></marker></defs>
+          <rect class="box" x="10" y="45" width="150" height="100" rx="10"/><text x="85" y="82" text-anchor="middle" font-weight="700">Notebooks</text><text class="sm" x="85" y="102" text-anchor="middle">SQL + Python</text><text class="sm" x="85" y="120" text-anchor="middle">00 a 06</text>
+          <rect class="box" x="195" y="45" width="150" height="100" rx="10"/><text x="270" y="82" text-anchor="middle" font-weight="700">3 CSVs</text><text class="sm" x="270" y="102" text-anchor="middle">separador ;</text><text class="sm" x="270" y="120" text-anchor="middle">decimal com vírgula</text>
+          <rect class="box" x="380" y="45" width="150" height="100" rx="10"/><text x="455" y="82" text-anchor="middle" font-weight="700">Power Query</text><text class="sm" x="455" y="102" text-anchor="middle">tipos em pt-BR</text><text class="sm" x="455" y="120" text-anchor="middle">+ 1 tabela digitada</text>
+          <rect class="box k" x="565" y="45" width="150" height="100" rx="10"/><text x="640" y="82" text-anchor="middle" font-weight="700">Modelo</text><text class="sm" x="640" y="102" text-anchor="middle">4 tabelas · 17 medidas</text><text class="sm" x="640" y="120" text-anchor="middle">1 relação</text>
+          <rect class="box" x="750" y="45" width="140" height="100" rx="10"/><text x="820" y="82" text-anchor="middle" font-weight="700">Relatório</text><text class="sm" x="820" y="102" text-anchor="middle">4 páginas</text><text class="sm" x="820" y="120" text-anchor="middle">Publicar na Web</text>
+          <path class="arrow" d="M160 95 H190" marker-end="url(#ah)"/><path class="arrow" d="M345 95 H375" marker-end="url(#ah)"/>
+          <path class="arrow" d="M530 95 H560" marker-end="url(#ah)"/><path class="arrow" d="M715 95 H745" marker-end="url(#ah)"/>
+        </svg>
+      </div>
+    </section>
+
+    <section id="modelo">
+      <h2>Modelo de dados</h2>
+      <p>Cultura do modelo: <code>pt-BR</code>. Uma relação liga a agenda da semana de teste ao histórico, para que os filtros de faixa etária e bairro também filtrem a agenda. As tabelas de premissas e modelos são de apoio e não se relacionam com as outras.</p>
+      <ul class="list"><li><code>Agenda.consulta_id</code> (muitos) → <code>Consultas.consulta_id</code> (um), filtro em direção única</li></ul>
+      <div class="figure">
+        <svg viewBox="0 0 900 220" role="img" aria-label="Diagrama: Consultas um para muitos Agenda; Premissas e Modelos isoladas">
+          <rect class="box k" x="40" y="30" width="250" height="150" rx="10"/><text x="165" y="62" text-anchor="middle" font-weight="700">Consultas</text>
+          <text class="sm" x="60" y="92">110.514 linhas · 1 por consulta</text><text class="sm" x="60" y="114">consulta_id (chave)</text><text class="sm" x="60" y="136">8 medidas · 6 colunas calculadas</text>
+          <rect class="box k" x="400" y="30" width="250" height="150" rx="10"/><text x="525" y="62" text-anchor="middle" font-weight="700">Agenda</text>
+          <text class="sm" x="420" y="92">35.240 linhas · semana de teste</text><text class="sm" x="420" y="114">consulta_id → Consultas</text><text class="sm" x="420" y="136">9 medidas · 3 colunas calculadas</text>
+          <path class="arrow" d="M290 105 H398"/><text x="300" y="98" font-size="13" font-weight="700">1</text><text x="384" y="98" font-size="13" font-weight="700">*</text>
+          <rect class="box" x="720" y="30" width="160" height="65" rx="10"/><text x="800" y="58" text-anchor="middle" font-weight="700">Premissas</text><text class="sm" x="800" y="78" text-anchor="middle">4 ações</text>
+          <rect class="box" x="720" y="115" width="160" height="65" rx="10"/><text x="800" y="143" text-anchor="middle" font-weight="700">Modelos</text><text class="sm" x="800" y="163" text-anchor="middle">4 modelos</text>
+        </svg>
+      </div>
+    </section>
+
+    <section id="tabelas">
+      <h2>Tabelas</h2>
+      
+    <section class="card" id="t-Consultas">
+      <header class="th"><h3>Consultas</h3><span class="meta">25 colunas · 8 medidas · CSV: pbi_consultas.csv</span></header>
+      <p>Uma linha por consulta agendada (abr–jun/2016), já limpa no notebook 02. É a base de toda a visão histórica.</p>
+      <div class="scroll"><table><thead><tr><th>Coluna</th><th>Tipo</th><th>Formato</th><th>Descrição</th></tr></thead><tbody><tr><td><code>consulta_id</code> <span class="pill hid">oculta</span></td><td>Inteiro</td><td>—</td><td>Identificador da consulta. Chave da relação com Agenda.</td></tr><tr><td><code>data_consulta</code></td><td>Data</td><td>dd/MM/yyyy</td><td>Data da consulta.</td></tr><tr><td><code>data_agendamento</code></td><td>Data</td><td>dd/MM/yyyy</td><td>Data em que a consulta foi marcada.</td></tr><tr><td><code>dia_semana</code> <span class="pill hid">oculta</span></td><td>Texto</td><td>—</td><td>Dia da semana por extenso (técnica, usada para ordenar).</td></tr><tr><td><code>antecedencia_dias</code></td><td>Inteiro</td><td>—</td><td>Dias entre o agendamento e a consulta.</td></tr><tr><td><code>faixa_antecedencia</code> <span class="pill hid">oculta</span></td><td>Texto</td><td>—</td><td>Faixa de antecedência com prefixo numérico, usada para ordenar.</td></tr><tr><td><code>idade</code></td><td>Inteiro</td><td>—</td><td>Idade do paciente na data da consulta.</td></tr><tr><td><code>faixa_etaria</code></td><td>Texto</td><td>—</td><td>Faixa etária (0-12, 13-18, …, 60+).</td></tr><tr><td><code>sexo</code></td><td>Texto</td><td>—</td><td>Feminino ou Masculino.</td></tr><tr><td><code>bairro</code></td><td>Texto</td><td>—</td><td>Bairro da unidade de saúde.</td></tr><tr><td><code>bolsa_familia</code></td><td>Inteiro</td><td>—</td><td>1 se o paciente recebe Bolsa Família.</td></tr><tr><td><code>hipertensao</code></td><td>Inteiro</td><td>—</td><td>1 se tem hipertensão.</td></tr><tr><td><code>diabetes</code></td><td>Inteiro</td><td>—</td><td>1 se tem diabetes.</td></tr><tr><td><code>alcoolismo</code></td><td>Inteiro</td><td>—</td><td>1 se tem registro de alcoolismo.</td></tr><tr><td><code>deficiencia</code></td><td>Inteiro</td><td>—</td><td>1 se tem alguma deficiência.</td></tr><tr><td><code>sms_recebido</code></td><td>Inteiro</td><td>—</td><td>1 se recebeu lembrete por SMS.</td></tr><tr><td><code>historico</code> <span class="pill hid">oculta</span></td><td>Texto</td><td>—</td><td>Primeira consulta, já veio e nunca faltou, ou já faltou antes (técnica).</td></tr><tr><td><code>faltou</code></td><td>Inteiro</td><td>—</td><td>1 se o paciente faltou. Variável alvo.</td></tr><tr><td><code>periodo</code></td><td>Texto</td><td>—</td><td>Histórico (treino) ou semana de teste, conforme a separação no tempo do notebook 03.</td></tr><tr><td><code>Dia da semana</code> <span class="pill calc">calculada</span></td><td>Texto</td><td>—</td><td>Abreviação do dia para os eixos, ordenada de segunda a sábado.</td></tr><tr><td><code>dia_ordem</code> <span class="pill calc">calculada</span> <span class="pill hid">oculta</span></td><td>Inteiro</td><td>—</td><td>Ordem de segunda (1) a sábado (6).</td></tr><tr><td><code>Antecedência</code> <span class="pill calc">calculada</span></td><td>Texto</td><td>—</td><td>Faixa de antecedência sem o prefixo, ordenada pela coluna técnica.</td></tr><tr><td><code>SMS</code> <span class="pill calc">calculada</span></td><td>Texto</td><td>—</td><td>Rótulo &quot;Com SMS&quot; ou &quot;Sem SMS&quot; para filtros.</td></tr><tr><td><code>historico_ordem</code> <span class="pill calc">calculada</span> <span class="pill hid">oculta</span></td><td>Inteiro</td><td>—</td><td>Ordem das categorias de histórico.</td></tr><tr><td><code>Histórico do paciente</code> <span class="pill calc">calculada</span></td><td>Texto</td><td>—</td><td>Cópia de exibição de historico, ordenada por historico_ordem.</td></tr></tbody></table></div>
+      <details><summary>Consulta Power Query (M)</summary><pre><code>let
+Fonte = Csv.Document(File.Contents(&quot;D:\Projetos IA\Projeto 2 Saude\powerbi\pbi_consultas.csv&quot;), [Delimiter=&quot;;&quot;, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+Tipos = Table.TransformColumnTypes(Cabecalhos, {{&quot;consulta_id&quot;, Int64.Type}, {&quot;data_consulta&quot;, type date}, {&quot;data_agendamento&quot;, type date}, {&quot;dia_semana&quot;, type text}, {&quot;antecedencia_dias&quot;, Int64.Type}, {&quot;faixa_antecedencia&quot;, type text}, {&quot;idade&quot;, Int64.Type}, {&quot;faixa_etaria&quot;, type text}, {&quot;sexo&quot;, type text}, {&quot;bairro&quot;, type text}, {&quot;bolsa_familia&quot;, Int64.Type}, {&quot;hipertensao&quot;, Int64.Type}, {&quot;diabetes&quot;, Int64.Type}, {&quot;alcoolismo&quot;, Int64.Type}, {&quot;deficiencia&quot;, Int64.Type}, {&quot;sms_recebido&quot;, Int64.Type}, {&quot;historico&quot;, type text}, {&quot;faltou&quot;, Int64.Type}, {&quot;periodo&quot;, type text}}, &quot;pt-BR&quot;)
+in
+Tipos</code></pre></details>
+    </section>
+    <section class="card" id="t-Agenda">
+      <header class="th"><h3>Agenda</h3><span class="meta">12 colunas · 9 medidas · CSV: pbi_acoes.csv</span></header>
+      <p>Consultas da semana de teste (30/05 a 08/06/2016), com o risco previsto pelo modelo e a ação recomendada pela regra de custo.</p>
+      <div class="scroll"><table><thead><tr><th>Coluna</th><th>Tipo</th><th>Formato</th><th>Descrição</th></tr></thead><tbody><tr><td><code>consulta_id</code> <span class="pill hid">oculta</span></td><td>Inteiro</td><td>—</td><td>Identificador da consulta. Liga com Consultas.</td></tr><tr><td><code>data_consulta</code></td><td>Data</td><td>dd/MM/yyyy</td><td>Data da consulta.</td></tr><tr><td><code>risco</code></td><td>Decimal</td><td>0.0%</td><td>Probabilidade de falta prevista pelo Gradient Boosting.</td></tr><tr><td><code>faltou</code></td><td>Inteiro</td><td>—</td><td>1 se faltou de fato (para conferir o modelo).</td></tr><tr><td><code>acao</code> <span class="pill hid">oculta</span></td><td>Texto</td><td>—</td><td>Ação de menor custo esperado (técnica).</td></tr><tr><td><code>custo_esperado_acao</code> <span class="pill hid">oculta</span></td><td>Decimal</td><td>—</td><td>Custo esperado com a ação escolhida (R$).</td></tr><tr><td><code>custo_esperado_sem_acao</code> <span class="pill hid">oculta</span></td><td>Decimal</td><td>—</td><td>Custo esperado sem nenhuma ação (R$).</td></tr><tr><td><code>faixa_risco</code> <span class="pill hid">oculta</span></td><td>Texto</td><td>—</td><td>Faixa de risco com prefixo numérico (técnica).</td></tr><tr><td><code>economia_esperada</code> <span class="pill hid">oculta</span></td><td>Decimal</td><td>—</td><td>Custo sem ação menos custo com a ação (R$).</td></tr><tr><td><code>Faixa de risco</code> <span class="pill calc">calculada</span></td><td>Texto</td><td>—</td><td>Faixa de risco para os eixos, ordenada.</td></tr><tr><td><code>acao_ordem</code> <span class="pill calc">calculada</span> <span class="pill hid">oculta</span></td><td>Inteiro</td><td>—</td><td>Ordem das ações, da mais barata à mais intensa.</td></tr><tr><td><code>Ação recomendada</code> <span class="pill calc">calculada</span></td><td>Texto</td><td>—</td><td>Ação recomendada para exibição, ordenada por acao_ordem.</td></tr></tbody></table></div>
+      <details><summary>Consulta Power Query (M)</summary><pre><code>let
+Fonte = Csv.Document(File.Contents(&quot;D:\Projetos IA\Projeto 2 Saude\powerbi\pbi_acoes.csv&quot;), [Delimiter=&quot;;&quot;, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+Tipos = Table.TransformColumnTypes(Cabecalhos, {{&quot;consulta_id&quot;, Int64.Type}, {&quot;data_consulta&quot;, type date}, {&quot;risco&quot;, type number}, {&quot;faltou&quot;, Int64.Type}, {&quot;acao&quot;, type text}, {&quot;custo_esperado_acao&quot;, type number}, {&quot;custo_esperado_sem_acao&quot;, type number}, {&quot;faixa_risco&quot;, type text}, {&quot;economia_esperada&quot;, type number}}, &quot;pt-BR&quot;)
+in
+Tipos</code></pre></details>
+    </section>
+    <section class="card" id="t-Premissas">
+      <header class="th"><h3>Premissas</h3><span class="meta">4 colunas · 0 medidas · CSV: pbi_premissas.csv</span></header>
+      <p>Custo e efeito premissados de cada ação. São ilustrativos e servem para a regra de próxima melhor ação.</p>
+      <div class="scroll"><table><thead><tr><th>Coluna</th><th>Tipo</th><th>Formato</th><th>Descrição</th></tr></thead><tbody><tr><td><code>Ação</code></td><td>Texto</td><td>—</td><td>Nome da ação.</td></tr><tr><td><code>Custo por consulta</code></td><td>Decimal</td><td>&quot;R$&quot; #,0.00</td><td>Custo de aplicar a ação em uma consulta.</td></tr><tr><td><code>Redução da falta (premissa)</code></td><td>Decimal</td><td>0%</td><td>Quanto a ação reduz a chance de falta (premissa, não medida).</td></tr><tr><td><code>Custo do horário vago</code></td><td>Decimal</td><td>&quot;R$&quot; #,0</td><td>Custo de um horário que fica vago (R$ 100).</td></tr></tbody></table></div>
+      <details><summary>Consulta Power Query (M)</summary><pre><code>let
+Fonte = Csv.Document(File.Contents(&quot;D:\Projetos IA\Projeto 2 Saude\powerbi\pbi_premissas.csv&quot;), [Delimiter=&quot;;&quot;, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+Tipos = Table.TransformColumnTypes(Cabecalhos, {{&quot;acao&quot;, type text}, {&quot;custo&quot;, type number}, {&quot;reducao_falta&quot;, type number}, {&quot;custo_horario_vago&quot;, type number}}, &quot;pt-BR&quot;)
+in
+Tipos</code></pre></details>
+    </section>
+    <section class="card" id="t-Modelos">
+      <header class="th"><h3>Modelos</h3><span class="meta">5 colunas · 0 medidas · Tabela digitada no Power Query (#table)</span></header>
+      <p>Métricas dos modelos na semana de teste, para a comparação da última página.</p>
+      <div class="scroll"><table><thead><tr><th>Coluna</th><th>Tipo</th><th>Formato</th><th>Descrição</th></tr></thead><tbody><tr><td><code>Modelo</code></td><td>Texto</td><td>—</td><td>Nome do modelo.</td></tr><tr><td><code>ROC-AUC</code></td><td>Decimal</td><td>0.000</td><td>Capacidade de separar quem falta de quem comparece.</td></tr><tr><td><code>PR-AUC</code></td><td>Decimal</td><td>0.000</td><td>Precisão média; referência sem informação: 0,185.</td></tr><tr><td><code>Brier</code></td><td>Decimal</td><td>0.000</td><td>Erro quadrático da probabilidade (menor é melhor).</td></tr><tr><td><code>Recall nos 20% de maior risco</code></td><td>Decimal</td><td>0.0%</td><td>Das faltas reais, quantas estão entre os 20% de maior risco previsto.</td></tr></tbody></table></div>
+      <details><summary>Consulta Power Query (M)</summary><pre><code>let
+Fonte = #table(type table [modelo = text, #&quot;ROC-AUC&quot; = number, #&quot;PR-AUC&quot; = number, Brier = number, #&quot;recall nos 20% de maior risco&quot; = number], {
+{&quot;Regressão logística&quot;, 0.6793, 0.3091, 0.1462, 0.3552},
+{&quot;Random Forest&quot;, 0.7348, 0.3381, 0.1366, 0.3803},
+{&quot;Gradient Boosting (escolhido)&quot;, 0.7341, 0.3419, 0.1376, 0.3774},
+{&quot;Rede densa (Keras)&quot;, 0.729, 0.341, 0.137, 0.380}
+})
+in
+Fonte</code></pre></details>
+    </section>
+    </section>
+
+    <section id="medidas">
+      <h2>Medidas DAX</h2>
+      <p>As medidas ficam em pastas (Histórico, SMS, Agenda). As taxas sempre são calculadas como divisão de somas, com <code>DIVIDE</code>, para respeitar qualquer filtro e evitar erro de divisão por zero.</p>
+      <div class="measures"><article class="measure"><header><h4>Consultas</h4><span class="meta">Consultas · Histórico · <code>#,0</code></span></header><p>Total de consultas no contexto.</p><pre><code>COUNTROWS(Consultas)</code></pre></article><article class="measure"><header><h4>Faltas</h4><span class="meta">Consultas · Histórico · <code>#,0</code></span></header><p>Total de faltas.</p><pre><code>SUM(Consultas[faltou])</code></pre></article><article class="measure"><header><h4>Taxa de falta</h4><span class="meta">Consultas · Histórico · <code>0.0%</code></span></header><p>Faltas ÷ consultas.</p><pre><code>DIVIDE([Faltas], [Consultas])</code></pre></article><article class="measure"><header><h4>Taxa de falta com SMS</h4><span class="meta">Consultas · SMS · <code>0.0%</code></span></header><p>Taxa de falta só das consultas com SMS.</p><pre><code>CALCULATE([Taxa de falta], Consultas[sms_recebido] = 1)</code></pre></article><article class="measure"><header><h4>Taxa de falta sem SMS</h4><span class="meta">Consultas · SMS · <code>0.0%</code></span></header><p>Taxa de falta só das consultas sem SMS.</p><pre><code>CALCULATE([Taxa de falta], Consultas[sms_recebido] = 0)</code></pre></article><article class="measure"><header><h4>% com SMS</h4><span class="meta">Consultas · SMS · <code>0.0%</code></span></header><p>Parcela das consultas que recebeu SMS.</p><pre><code>DIVIDE(CALCULATE([Consultas], Consultas[sms_recebido] = 1), [Consultas])</code></pre></article><article class="measure"><header><h4>Taxa de falta no mesmo dia</h4><span class="meta">Consultas · Histórico · <code>0.0%</code></span></header><p>Taxa de falta de quem agendou para o mesmo dia.</p><pre><code>CALCULATE([Taxa de falta], Consultas[antecedencia_dias] = 0)</code></pre></article><article class="measure"><header><h4>Taxa de falta com 8+ dias</h4><span class="meta">Consultas · Histórico · <code>0.0%</code></span></header><p>Taxa de falta de quem agendou com 8 dias ou mais.</p><pre><code>CALCULATE([Taxa de falta], Consultas[antecedencia_dias] &gt;= 8)</code></pre></article><article class="measure"><header><h4>Consultas na agenda</h4><span class="meta">Agenda · Agenda · <code>#,0</code></span></header><p>Consultas da semana de teste.</p><pre><code>COUNTROWS(Agenda)</code></pre></article><article class="measure"><header><h4>% da agenda</h4><span class="meta">Agenda · Agenda · <code>0.0%</code></span></header><p>Participação de cada ação na agenda, ignorando o filtro de ação.</p><pre><code>DIVIDE([Consultas na agenda], CALCULATE([Consultas na agenda], REMOVEFILTERS(Agenda[Ação recomendada], Agenda[acao], Agenda[acao_ordem])))</code></pre></article><article class="measure"><header><h4>Risco médio previsto</h4><span class="meta">Agenda · Agenda · <code>0.0%</code></span></header><p>Média do risco previsto.</p><pre><code>AVERAGE(Agenda[risco])</code></pre></article><article class="measure"><header><h4>Falta real na agenda</h4><span class="meta">Agenda · Agenda · <code>0.0%</code></span></header><p>Taxa de falta real na semana de teste.</p><pre><code>AVERAGE(Agenda[faltou])</code></pre></article><article class="measure"><header><h4>Custo esperado sem ação</h4><span class="meta">Agenda · Agenda · <code>&quot;R$&quot; #,0</code></span></header><p>Soma do custo esperado sem ação.</p><pre><code>SUM(Agenda[custo_esperado_sem_acao])</code></pre></article><article class="measure"><header><h4>Custo esperado com a regra</h4><span class="meta">Agenda · Agenda · <code>&quot;R$&quot; #,0</code></span></header><p>Soma do custo esperado com a ação recomendada.</p><pre><code>SUM(Agenda[custo_esperado_acao])</code></pre></article><article class="measure"><header><h4>Economia esperada</h4><span class="meta">Agenda · Agenda · <code>&quot;R$&quot; #,0</code></span></header><p>Diferença entre os dois custos (R$).</p><pre><code>SUM(Agenda[economia_esperada])</code></pre></article><article class="measure"><header><h4>Economia esperada %</h4><span class="meta">Agenda · Agenda · <code>0.0%</code></span></header><p>Economia sobre o custo sem ação.</p><pre><code>DIVIDE([Economia esperada], [Custo esperado sem ação])</code></pre></article><article class="measure"><header><h4>Consultas de alto risco</h4><span class="meta">Agenda · Agenda · <code>#,0</code></span></header><p>Consultas com risco previsto de 30% ou mais.</p><pre><code>CALCULATE([Consultas na agenda], Agenda[risco] &gt;= 0.3)</code></pre></article></div>
+    </section>
+
+    <section id="calculadas">
+      <h2>Colunas calculadas</h2>
+      <p>Servem para exibir rótulos limpos e ordená-los corretamente nos eixos. As colunas técnicas de ordem ficam ocultas.</p>
+      <div class="card scroll"><table><thead><tr><th>Coluna</th><th>Expressão DAX</th><th>Ordenação</th></tr></thead><tbody><tr><td><code>Consultas[Dia da semana]</code></td><td><code class="dax">SWITCH(Consultas[dia_semana], &quot;segunda&quot;, &quot;Seg&quot;, &quot;terça&quot;, &quot;Ter&quot;, &quot;quarta&quot;, &quot;Qua&quot;, &quot;quinta&quot;, &quot;Qui&quot;, &quot;sexta&quot;, &quot;Sex&quot;, &quot;sábado&quot;, &quot;Sáb&quot;, &quot;Dom&quot;)</code></td><td>ordena por dia_ordem</td></tr><tr><td><code>Consultas[dia_ordem]</code></td><td><code class="dax">SWITCH(Consultas[dia_semana], &quot;segunda&quot;, 1, &quot;terça&quot;, 2, &quot;quarta&quot;, 3, &quot;quinta&quot;, 4, &quot;sexta&quot;, 5, &quot;sábado&quot;, 6, 7)</code></td><td>—</td></tr><tr><td><code>Consultas[Antecedência]</code></td><td><code class="dax">MID(Consultas[faixa_antecedencia], 5, 50)</code></td><td>ordena por faixa_antecedencia</td></tr><tr><td><code>Consultas[SMS]</code></td><td><code class="dax">IF(Consultas[sms_recebido] = 1, &quot;Com SMS&quot;, &quot;Sem SMS&quot;)</code></td><td>—</td></tr><tr><td><code>Consultas[historico_ordem]</code></td><td><code class="dax">SWITCH(Consultas[historico], &quot;Primeira consulta&quot;, 1, &quot;Já veio e nunca faltou&quot;, 2, 3)</code></td><td>—</td></tr><tr><td><code>Consultas[Histórico do paciente]</code></td><td><code class="dax">Consultas[historico] &amp; &quot;&quot;</code></td><td>ordena por historico_ordem</td></tr><tr><td><code>Agenda[Faixa de risco]</code></td><td><code class="dax">MID(Agenda[faixa_risco], 5, 50)</code></td><td>ordena por faixa_risco</td></tr><tr><td><code>Agenda[acao_ordem]</code></td><td><code class="dax">SWITCH(Agenda[acao], &quot;Nenhuma ação&quot;, 1, &quot;Lembrete automático&quot;, 2, &quot;Ligação de confirmação&quot;, 3, &quot;Reconfirmação obrigatória&quot;, 4, 5)</code></td><td>—</td></tr><tr><td><code>Agenda[Ação recomendada]</code></td><td><code class="dax">Agenda[acao] &amp; &quot;&quot;</code></td><td>ordena por acao_ordem</td></tr></tbody></table></div>
+    </section>
+
+    <section id="paginas">
+      <h2>Páginas do relatório</h2>
+      <div class="card scroll"><table><thead><tr><th>Página</th><th>O que mostra</th><th>Filtros na página</th></tr></thead><tbody><tr><td><b>Visão geral</b></td><td>Taxa de falta geral, por dia, antecedência, histórico, faixa etária e bairro (500+ consultas).</td><td>Sexo, faixa etária, bairro, SMS, data</td></tr><tr><td><b>O paradoxo do SMS</b></td><td>Falta com e sem SMS dentro de cada faixa de antecedência, e quem recebe SMS.</td><td>Sexo, faixa etária, bairro, histórico</td></tr><tr><td><b>Agenda da semana</b></td><td>Consultas por ação recomendada, falta real por faixa de risco, resumo por ação e leitura da economia.</td><td>Ação, faixa de risco, faixa etária, bairro, data</td></tr><tr><td><b>Premissas e modelo</b></td><td>Tabela de premissas, comparação dos modelos, como a regra decide e limitações.</td><td>Sem filtros</td></tr></tbody></table></div>
+    </section>
+
+    <section id="decisoes">
+      <h2>Decisões de modelagem</h2>
+      <ul class="list">
+        <li><b>Lógica no Python, não no Power Query.</b> Limpeza, variáveis, modelo e regra de custo são feitos nos notebooks, que já têm testes e conclusões. O Power BI só apresenta, o que deixa o modelo leve e fácil de revisar.</li>
+        <li><b>Colunas de exibição separadas das técnicas.</b> Rótulos como "Ação recomendada" e "Histórico do paciente" são cópias ordenadas por colunas ocultas, porque uma coluna não pode ser ordenada por outra derivada dela mesma (dependência circular).</li>
+        <li><b>Tipos convertidos com cultura pt-BR.</b> Os CSVs usam vírgula decimal; tipar com <code>"pt-BR"</code> evita números lidos como texto ou multiplicados por mil.</li>
+        <li><b>Filtro de volume no ranking de bairros.</b> O gráfico só mostra bairros com 500 consultas ou mais, para não destacar taxas instáveis de bairros pequenos.</li>
+        <li><b>Tema e ícones próprios.</b> O relatório usa um tema JSON registrado no projeto e ícones SVG desenhados para o painel.</li>
+      </ul>
+    </section>
+
+    <section id="atencao">
+      <h2>Pontos de atenção</h2>
+      <ul class="list">
+        <li class="warn"><b>Caminho fixo dos arquivos.</b> As consultas apontam para <code>D:\Projetos IA\Projeto 2 Saude\powerbi\</code>. Para rodar em outra máquina, troque por um parâmetro do Power Query com a pasta dos CSVs.</li>
+        <li class="warn"><b>Tabela Modelos digitada.</b> As métricas foram copiadas dos notebooks 03 e 04. Se os modelos forem retreinados, atualize os valores ou passe a ler um CSV.</li>
+        <li class="warn"><b>Premissas ilustrativas.</b> Custos e efeitos das ações não foram medidos; a economia exibida depende deles e deve ser validada com um teste A/B.</li>
+        <li class="warn"><b>Visuais ocultos de uma versão anterior.</b> O projeto guarda 14 visuais vazios e ocultos da primeira versão do layout. Não afetam o relatório e podem ser apagados no painel Seleção.</li>
+      </ul>
+    </section>
+
+    <section id="validacao">
+      <h2>Validação</h2>
+      <p>Os números do painel foram conferidos com consultas DAX executadas no modelo e comparados aos resultados dos notebooks.</p>
+      <div class="card scroll"><table><thead><tr><th>Indicador</th><th>Notebook</th><th>Power BI (DAX)</th><th></th></tr></thead><tbody><tr><td>Consultas na base</td><td class="num">110.514</td><td class="num">110.514</td><td><span class="pill ok">confere</span></td></tr><tr><td>Taxa de falta</td><td class="num">20,2%</td><td class="num">20,2%</td><td><span class="pill ok">confere</span></td></tr><tr><td>Falta com SMS / sem SMS</td><td class="num">27,6% / 16,7%</td><td class="num">27,6% / 16,7%</td><td><span class="pill ok">confere</span></td></tr><tr><td>Consultas na semana de teste</td><td class="num">35.240</td><td class="num">35.240</td><td><span class="pill ok">confere</span></td></tr><tr><td>Risco médio previsto</td><td class="num">21,6%</td><td class="num">21,6%</td><td><span class="pill ok">confere</span></td></tr><tr><td>Economia esperada</td><td class="num">R$ 152.234</td><td class="num">R$ 152.234</td><td><span class="pill ok">confere</span></td></tr></tbody></table></div>
+    </section>
+
+    <section id="atualizar">
+      <h2>Como atualizar</h2>
+      <ol class="list">
+        <li>Rode os notebooks do projeto no Colab, do 00 ao 06. O 06 gera os CSVs em <code>dados/powerbi</code> no Google Drive.</li>
+        <li>Baixe a pasta <code>powerbi</code> para o caminho usado pelo modelo (ou ajuste o parâmetro de pasta).</li>
+        <li>Abra o <code>Painel Faltas Consultas.pbip</code> e clique em <b>Atualizar</b>.</li>
+        <li>Confira os indicadores da seção Validação e publique de novo.</li>
+      </ol>
+    </section>
+
+    <footer>
+      <p>Projeto autoral de Jéssica Martins · <a href="https://github.com/jessicapmartins/previsao-faltas-consultas" target="_blank" rel="noopener">código no GitHub</a> · <a href="https://app.powerbi.com/view?r=eyJrIjoiODA0MjQyYzYtNTMwOC00ZGM0LTgxYjUtOTMyMzY2ZjBhNjYzIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9" target="_blank" rel="noopener">painel publicado</a></p>
+      <p>Dados: Medical Appointment No Shows (Kaggle, Joni Hoppen e Aquarela Analytics), licença CC BY-NC-SA 4.0.</p>
+    </footer>
+  </main>
+</div>

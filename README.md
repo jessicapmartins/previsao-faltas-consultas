@@ -22,6 +22,8 @@ Projeto de ponta a ponta, supervisionado, seguindo o CRISP-DM. Ele vai do SQL ao
 
 🔗 [Abrir o painel](https://app.powerbi.com/view?r=eyJrIjoiODA0MjQyYzYtNTMwOC00ZGM0LTgxYjUtOTMyMzY2ZjBhNjYzIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9): 4 páginas (visão geral, paradoxo do SMS, agenda da semana com a próxima melhor ação, premissas e modelo), com filtros por sexo, faixa etária, bairro, SMS e período.
 
+📘 **Documentação do modelo Power BI:** [abrir](https://claude.ai/artifact/NVBMomumL2gSB1UVCS4ktG) · gerada por [`docs/gerar_documentacao.py`](docs/gerar_documentacao.py), que lê os arquivos TMDL do projeto (tabelas, colunas, 17 medidas DAX, relação e fontes).
+
 ## Principais resultados
 - **20,2% das consultas viram falta** (22.319 de 110.527).
 - **A antecedência é o principal fator:** consultas do mesmo dia têm 4,6% de falta; a partir de 8 dias de antecedência, mais de 30%. Histórico de faltas e idade vêm em seguida.

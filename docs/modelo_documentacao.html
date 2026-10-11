@@ -1,0 +1,202 @@
+<title>Documentação · Painel de Faltas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: documentação técnica com índice lateral fixo no desktop e conteúdo em coluna única legível */
+:root{
+  --bg:#F5F7FA; --surface:#FFFFFF; --ink:#13233A; --muted:#5B6B7F; --line:#DCE3EC;
+  --navy:#13315C; --teal:#0E8A7C; --teal-soft:#DDF1EE; --coral:#D9573B; --amber:#B7791F; --code:#EEF2F7;
+  --display:"Familjen Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1420; --surface:#141E2D; --ink:#E3EAF3; --muted:#9AA9BC; --line:#25334A;
+  --navy:#8DB4F0; --teal:#3CC3B1; --teal-soft:#16352F; --coral:#F07A5E; --amber:#E2A33B; --code:#1A2638; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1420; --surface:#141E2D; --ink:#E3EAF3; --muted:#9AA9BC; --line:#25334A;
+  --navy:#8DB4F0; --teal:#3CC3B1; --teal-soft:#16352F; --coral:#F07A5E; --amber:#E2A33B; --code:#1A2638; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.layout{max-width:1220px;margin:0 auto;padding-inline:clamp(16px,3vw,32px);padding-block:28px 64px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px}
+@media (max-width:900px){.layout{grid-template-columns:1fr}.toc{position:static!important}}
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px);align-self:start;display:grid;gap:4px;font-size:.92rem}
+.toc .lbl{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.toc a{color:var(--ink);text-decoration:none;padding:4px 10px;border-left:2px solid var(--line)}
+.toc a:hover,.toc a:focus-visible{border-left-color:var(--teal);color:var(--teal);outline:none}
+main{display:grid;gap:40px;min-width:0}
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.1}
+h2{font-size:1.5rem;padding-bottom:8px;border-bottom:1px solid var(--line)}
+h3{font-size:1.15rem}
+h4{font-size:1rem}
+p{margin:0;max-width:72ch}
+.eyebrow{font-family:var(--mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.intro{display:grid;gap:12px}
+.lede{font-size:1.08rem;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:8px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-family:var(--mono);font-size:1.5rem;font-weight:500;color:var(--navy)}
+.stat span{font-size:.85rem;color:var(--muted)}
+section{display:grid;gap:14px;min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:grid;gap:10px;min-width:0}
+.th{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px}
+.meta{font-size:.84rem;color:var(--muted)}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+code{font-family:var(--mono);font-size:.86em;background:var(--code);padding:1px 5px;border-radius:4px}
+pre{margin:0;background:var(--code);border-radius:8px;padding:12px 14px;overflow-x:auto;font-size:.84rem;line-height:1.55}
+pre code{background:none;padding:0}
+code.dax{white-space:pre-wrap;background:none;padding:0}
+details summary{cursor:pointer;color:var(--teal);font-size:.9rem}
+details pre{margin-top:8px}
+.pill{display:inline-block;font-size:.72rem;padding:1px 8px;border-radius:999px;margin-left:4px;vertical-align:1px;font-family:var(--body)}
+.pill.calc{background:var(--teal-soft);color:var(--teal)}
+.pill.hid{border:1px solid var(--line);color:var(--muted)}
+.pill.ok{background:var(--teal-soft);color:var(--teal)}
+.measures{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px}
+.measure pre{white-space:pre-wrap;word-break:break-word}
+.measure{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:8px;min-width:0}
+.measure header{display:grid;gap:2px}
+.figure{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;overflow-x:auto}
+.figure svg{display:block;min-width:680px;width:100%;height:auto}
+.figure text{font-family:var(--body);fill:var(--ink)}
+.figure .sm{font-size:12px;fill:var(--muted)}
+.box{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.box.k{fill:var(--teal-soft);stroke:var(--teal)}
+.arrow{stroke:var(--muted);stroke-width:1.6;fill:none}
+.list{display:grid;gap:10px;padding-left:20px;margin:0}
+.list li{max-width:72ch}
+.warn{border-left:3px solid var(--amber);padding:2px 0 2px 14px}
+footer{font-size:.86rem;color:var(--muted);display:grid;gap:4px}
+footer a,main a{color:var(--teal)}
+</style>
+
+<div class="layout">
+  <nav class="toc" aria-label="Índice">
+    <span class="lbl">Nesta documentação</span>
+    <a href="#visao">Visão geral</a><a href="#arquitetura">Arquitetura</a><a href="#modelo">Modelo de dados</a>
+    <a href="#tabelas">Tabelas</a><a href="#medidas">Medidas DAX</a><a href="#calculadas">Colunas calculadas</a>
+    <a href="#paginas">Páginas do relatório</a><a href="#decisoes">Decisões de modelagem</a><a href="#atencao">Pontos de atenção</a>
+    <a href="#validacao">Validação</a><a href="#atualizar">Como atualizar</a>
+  </nav>
+
+  <main>
+    <header class="intro" id="visao">
+      <span class="eyebrow">Documentação técnica · Power BI</span>
+      <h1>Painel de faltas em consultas</h1>
+      <p class="lede">Modelo semântico e relatório do projeto de previsão de faltas: 110 mil consultas da rede pública de Vitória (ES), o risco previsto por um modelo de Machine Learning e a ação recomendada para cada consulta.</p>
+      <p>Esta documentação foi gerada por um script que lê os arquivos do projeto Power BI (formato .pbip, TMDL). A estrutura, os tipos e as fórmulas DAX vêm direto do modelo; as descrições de negócio foram escritas à parte.</p>
+      <div class="stats">
+        <div class="stat"><b>{{N_TAB}}</b><span>tabelas</span></div>
+        <div class="stat"><b>{{N_COL}}</b><span>colunas</span></div>
+        <div class="stat"><b>{{N_MED}}</b><span>medidas DAX</span></div>
+        <div class="stat"><b>{{N_CALC}}</b><span>colunas calculadas</span></div>
+        <div class="stat"><b>{{N_REL}}</b><span>relação</span></div>
+        <div class="stat"><b>4</b><span>páginas</span></div>
+      </div>
+    </header>
+
+    <section id="arquitetura">
+      <h2>Arquitetura</h2>
+      <p>Os dados são preparados em Python (notebooks do projeto) e chegam ao Power BI como arquivos CSV no padrão brasileiro. O Power Query só lê e tipa as colunas: toda a lógica pesada fica nos notebooks.</p>
+      <div class="figure">
+        <svg viewBox="0 0 900 190" role="img" aria-label="Fluxo: notebooks Python geram CSVs, lidos pelo Power Query, que alimenta o modelo e as páginas publicadas">
+          <defs><marker id="ah" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="var(--muted)"/></marker></defs>
+          <rect class="box" x="10" y="45" width="150" height="100" rx="10"/><text x="85" y="82" text-anchor="middle" font-weight="700">Notebooks</text><text class="sm" x="85" y="102" text-anchor="middle">SQL + Python</text><text class="sm" x="85" y="120" text-anchor="middle">00 a 06</text>
+          <rect class="box" x="195" y="45" width="150" height="100" rx="10"/><text x="270" y="82" text-anchor="middle" font-weight="700">3 CSVs</text><text class="sm" x="270" y="102" text-anchor="middle">separador ;</text><text class="sm" x="270" y="120" text-anchor="middle">decimal com vírgula</text>
+          <rect class="box" x="380" y="45" width="150" height="100" rx="10"/><text x="455" y="82" text-anchor="middle" font-weight="700">Power Query</text><text class="sm" x="455" y="102" text-anchor="middle">tipos em pt-BR</text><text class="sm" x="455" y="120" text-anchor="middle">+ 1 tabela digitada</text>
+          <rect class="box k" x="565" y="45" width="150" height="100" rx="10"/><text x="640" y="82" text-anchor="middle" font-weight="700">Modelo</text><text class="sm" x="640" y="102" text-anchor="middle">4 tabelas · 17 medidas</text><text class="sm" x="640" y="120" text-anchor="middle">1 relação</text>
+          <rect class="box" x="750" y="45" width="140" height="100" rx="10"/><text x="820" y="82" text-anchor="middle" font-weight="700">Relatório</text><text class="sm" x="820" y="102" text-anchor="middle">4 páginas</text><text class="sm" x="820" y="120" text-anchor="middle">Publicar na Web</text>
+          <path class="arrow" d="M160 95 H190" marker-end="url(#ah)"/><path class="arrow" d="M345 95 H375" marker-end="url(#ah)"/>
+          <path class="arrow" d="M530 95 H560" marker-end="url(#ah)"/><path class="arrow" d="M715 95 H745" marker-end="url(#ah)"/>
+        </svg>
+      </div>
+    </section>
+
+    <section id="modelo">
+      <h2>Modelo de dados</h2>
+      <p>Cultura do modelo: <code>{{CULTURA}}</code>. Uma relação liga a agenda da semana de teste ao histórico, para que os filtros de faixa etária e bairro também filtrem a agenda. As tabelas de premissas e modelos são de apoio e não se relacionam com as outras.</p>
+      <ul class="list">{{RELS}}</ul>
+      <div class="figure">
+        <svg viewBox="0 0 900 220" role="img" aria-label="Diagrama: Consultas um para muitos Agenda; Premissas e Modelos isoladas">
+          <rect class="box k" x="40" y="30" width="250" height="150" rx="10"/><text x="165" y="62" text-anchor="middle" font-weight="700">Consultas</text>
+          <text class="sm" x="60" y="92">110.514 linhas · 1 por consulta</text><text class="sm" x="60" y="114">consulta_id (chave)</text><text class="sm" x="60" y="136">8 medidas · 6 colunas calculadas</text>
+          <rect class="box k" x="400" y="30" width="250" height="150" rx="10"/><text x="525" y="62" text-anchor="middle" font-weight="700">Agenda</text>
+          <text class="sm" x="420" y="92">35.240 linhas · semana de teste</text><text class="sm" x="420" y="114">consulta_id → Consultas</text><text class="sm" x="420" y="136">9 medidas · 3 colunas calculadas</text>
+          <path class="arrow" d="M290 105 H398"/><text x="300" y="98" font-size="13" font-weight="700">1</text><text x="384" y="98" font-size="13" font-weight="700">*</text>
+          <rect class="box" x="720" y="30" width="160" height="65" rx="10"/><text x="800" y="58" text-anchor="middle" font-weight="700">Premissas</text><text class="sm" x="800" y="78" text-anchor="middle">4 ações</text>
+          <rect class="box" x="720" y="115" width="160" height="65" rx="10"/><text x="800" y="143" text-anchor="middle" font-weight="700">Modelos</text><text class="sm" x="800" y="163" text-anchor="middle">4 modelos</text>
+        </svg>
+      </div>
+    </section>
+
+    <section id="tabelas">
+      <h2>Tabelas</h2>
+      {{TABELAS}}
+    </section>
+
+    <section id="medidas">
+      <h2>Medidas DAX</h2>
+      <p>As medidas ficam em pastas (Histórico, SMS, Agenda). As taxas sempre são calculadas como divisão de somas, com <code>DIVIDE</code>, para respeitar qualquer filtro e evitar erro de divisão por zero.</p>
+      <div class="measures">{{MEDIDAS}}</div>
+    </section>
+
+    <section id="calculadas">
+      <h2>Colunas calculadas</h2>
+      <p>Servem para exibir rótulos limpos e ordená-los corretamente nos eixos. As colunas técnicas de ordem ficam ocultas.</p>
+      <div class="card scroll"><table><thead><tr><th>Coluna</th><th>Expressão DAX</th><th>Ordenação</th></tr></thead><tbody>{{CALC}}</tbody></table></div>
+    </section>
+
+    <section id="paginas">
+      <h2>Páginas do relatório</h2>
+      <div class="card scroll"><table><thead><tr><th>Página</th><th>O que mostra</th><th>Filtros na página</th></tr></thead><tbody>{{PAGINAS}}</tbody></table></div>
+    </section>
+
+    <section id="decisoes">
+      <h2>Decisões de modelagem</h2>
+      <ul class="list">
+        <li><b>Lógica no Python, não no Power Query.</b> Limpeza, variáveis, modelo e regra de custo são feitos nos notebooks, que já têm testes e conclusões. O Power BI só apresenta, o que deixa o modelo leve e fácil de revisar.</li>
+        <li><b>Colunas de exibição separadas das técnicas.</b> Rótulos como "Ação recomendada" e "Histórico do paciente" são cópias ordenadas por colunas ocultas, porque uma coluna não pode ser ordenada por outra derivada dela mesma (dependência circular).</li>
+        <li><b>Tipos convertidos com cultura pt-BR.</b> Os CSVs usam vírgula decimal; tipar com <code>"pt-BR"</code> evita números lidos como texto ou multiplicados por mil.</li>
+        <li><b>Filtro de volume no ranking de bairros.</b> O gráfico só mostra bairros com 500 consultas ou mais, para não destacar taxas instáveis de bairros pequenos.</li>
+        <li><b>Tema e ícones próprios.</b> O relatório usa um tema JSON registrado no projeto e ícones SVG desenhados para o painel.</li>
+      </ul>
+    </section>
+
+    <section id="atencao">
+      <h2>Pontos de atenção</h2>
+      <ul class="list">
+        <li class="warn"><b>Caminho fixo dos arquivos.</b> As consultas apontam para <code>D:\Projetos IA\Projeto 2 Saude\powerbi\</code>. Para rodar em outra máquina, troque por um parâmetro do Power Query com a pasta dos CSVs.</li>
+        <li class="warn"><b>Tabela Modelos digitada.</b> As métricas foram copiadas dos notebooks 03 e 04. Se os modelos forem retreinados, atualize os valores ou passe a ler um CSV.</li>
+        <li class="warn"><b>Premissas ilustrativas.</b> Custos e efeitos das ações não foram medidos; a economia exibida depende deles e deve ser validada com um teste A/B.</li>
+        <li class="warn"><b>Visuais ocultos de uma versão anterior.</b> O projeto guarda 14 visuais vazios e ocultos da primeira versão do layout. Não afetam o relatório e podem ser apagados no painel Seleção.</li>
+      </ul>
+    </section>
+
+    <section id="validacao">
+      <h2>Validação</h2>
+      <p>Os números do painel foram conferidos com consultas DAX executadas no modelo e comparados aos resultados dos notebooks.</p>
+      <div class="card scroll"><table><thead><tr><th>Indicador</th><th>Notebook</th><th>Power BI (DAX)</th><th></th></tr></thead><tbody>{{VALIDACAO}}</tbody></table></div>
+    </section>
+
+    <section id="atualizar">
+      <h2>Como atualizar</h2>
+      <ol class="list">
+        <li>Rode os notebooks do projeto no Colab, do 00 ao 06. O 06 gera os CSVs em <code>dados/powerbi</code> no Google Drive.</li>
+        <li>Baixe a pasta <code>powerbi</code> para o caminho usado pelo modelo (ou ajuste o parâmetro de pasta).</li>
+        <li>Abra o <code>Painel Faltas Consultas.pbip</code> e clique em <b>Atualizar</b>.</li>
+        <li>Confira os indicadores da seção Validação e publique de novo.</li>
+      </ol>
+    </section>
+
+    <footer>
+      <p>Projeto autoral de Jéssica Martins · <a href="https://github.com/jessicapmartins/previsao-faltas-consultas" target="_blank" rel="noopener">código no GitHub</a> · <a href="https://app.powerbi.com/view?r=eyJrIjoiODA0MjQyYzYtNTMwOC00ZGM0LTgxYjUtOTMyMzY2ZjBhNjYzIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9" target="_blank" rel="noopener">painel publicado</a></p>
+      <p>Dados: Medical Appointment No Shows (Kaggle, Joni Hoppen e Aquarela Analytics), licença CC BY-NC-SA 4.0.</p>
+    </footer>
+  </main>
+</div>
